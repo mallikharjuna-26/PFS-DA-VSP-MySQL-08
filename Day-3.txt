@@ -1,0 +1,436 @@
+SQL Commands
+==================
+SQL (Structured Query Language) commands are broadly classified into five main categories based on their functionality: DDL, DML, DQL, DCL, and TCL. Each category and every command within it is explained below with its purpose and usage.
+Command
+Description / Definition
+DDL
+Data Definition Language - defines and modifies the structure of database objects (tables, schemas, indexes).
+DML
+Data Manipulation Language - manages data stored within database objects (insert, update, delete).
+DQL
+Data Query Language - used to fetch/retrieve data from the database.
+DCL
+Data Control Language - manages permissions and access control on database objects.
+TCL
+Transaction Control Language - manages transactions to maintain data integrity.
+
+
+ 
+1. DDL - Data Definition Language
+DDL commands are used to define, create, alter, and remove the structure of database objects such as tables, schemas, and indexes. Changes made by DDL commands are auto-committed and permanent.
+Command
+Description / Definition
+CREATE
+Creates a new database object such as a table, database, view, index, or schema. Example: CREATE TABLE Students (ID INT, Name VARCHAR(50));
+ALTER
+Modifies the structure of an existing database object, such as adding, deleting, or modifying columns in a table. Example: ALTER TABLE Students ADD Email VARCHAR(100);
+DROP
+Permanently deletes an existing database object (table, database, index, view) along with all its data and structure. This action cannot be rolled back in most databases.
+TRUNCATE
+Removes all rows/records from a table quickly while keeping the table structure intact for future use. Faster than DELETE as it does not log individual row deletions.
+RENAME
+Renames an existing database object, such as a table or column, to a new name without changing its structure or data.
+COMMENT
+Adds explanatory notes or comments to database objects (tables, columns) for documentation purposes; does not affect data or structure.
+
+ 
+Data Types
+===========
+Numeric Data Types
+Data Types
+Data types in MySQL are essential for defining the kind of information each column in your table can store.
+Categorical Overview
+•   Numeric Data Types: Used for storing numerical values.
+•   String Data Types: Used for storing text data.
+•   Date and Time Data Types: Used for storing date and time information.
+Common Numeric Data Types
+•   TINY INT
+•   SMALL INT
+•   MEDIUM INT
+•   INT / INTEGER
+•   BIG INT
+•   FLOAT
+•   DOUBLE
+•   DECIMAL (M,D)
+TINY INT
+•   Stores very small integers
+•   Range:
+◦    Signed: -128 to 127
+◦    Unsigned: 0 to 255
+ 
+  CREATE TABLE tinyint_example (
+      age TINYINT
+  );
+  INSERT INTO tinyint_example (age) VALUES (25);
+ 
+SMALL INT
+•   Stores small integers
+•   Range:
+◦    Signed: -32,768 to 32,767
+◦    Unsigned: 0 to 65,535
+ 
+  CREATE TABLE smallint_example (
+      population SMALLINT
+  );
+  INSERT INTO smallint_example (population) VALUES (15000);
+ 
+MEDIUM INT
+•   Stores medium sized integers
+•   Range:
+◦    Signed: -83,88,608 to 83,88,607
+◦    Unsigned: 0 to 1,67,77,215
+ 
+  CREATE TABLE mediumint_example (
+      visitors MEDIUMINT
+  );
+  INSERT INTO mediumint_example (visitors) VALUES (5000000);
+ 
+INT / INTEGER
+•   Stores standard integers
+•   Range:
+◦    Signed: -2,14,74,83,648 to 2,14,74,83,647
+◦    Unsigned: 0 to 4,29,49,67,295
+ 
+  CREATE TABLE int_example (
+      product_id INT
+  );
+  INSERT INTO int_example (product_id) VALUES (123456);
+ 
+BIG INT
+•   Stores large integers
+•   Range:
+◦    Signed: -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807
+◦    Unsigned: 0 to 18,446,744,073,709,551,615
+ 
+  CREATE TABLE bigint_example (
+      account_balance BIGINT
+  );
+  INSERT INTO bigint_example (account_balance) VALUES (5000000000);
+ 
+FLOAT
+•   Stores floating-point numbers with single precision.
+•   Range:
+◦    Approx -3.402823466E+38 to 3.402823466E+38
+ 
+  CREATE TABLE float_example (
+      temperature FLOAT
+  );
+  INSERT INTO float_example (temperature) VALUES (36.5);
+ 
+DOUBLE
+•   Stores floating-point numbers with double precision.
+•   Range:
+◦    Approx -1.7976931348623157E+308 to 1.7976931348623157E+308
+ 
+  CREATE TABLE double_example (
+      distance DOUBLE
+  );
+  INSERT INTO double_example (distance) VALUES (12345.6789);
+ 
+DECIMAL (M,D)
+•   Stores fixed-point numbers with exact precision, commonly used for financial data.
+•   M is the maximum number of digits, and D is the number of digits after the decimal.
+ 
+  CREATE TABLE decimal_example (
+      price DECIMAL(10, 2)
+  );
+  INSERT INTO decimal_example (price) VALUES (1999.99);
+ 
+
+ 
+String and Binary Data Types
+Common String Data Types
+•   CHAR
+•   VARCHAR
+•   TEXT
+•   TINY TEXT
+•   MEDIUM TEXT
+•   LONG TEXT
+•   ENUM
+•   SET
+CHAR
+•   Fixed-length string data type.
+•   Ideal for storing strings that have a consistent length.
+•   Pads the string with spaces to the specified length if the input is shorter.
+ 
+  CREATE TABLE example (
+      code CHAR(5)
+  );
+  INSERT INTO example (code) VALUES ('AB'), ('ABCDE');
+  -- Output: 'AB   ', 'ABCDE' (padded to 5 characters if shorter)
+ 
+VARCHAR
+•   Variable-length string data type.
+•   More storage-efficient than CHAR for variable-length strings as it only uses as much space as needed.
+•   Maximum length is 65,535 bytes, but keep in mind that UTF-8 characters may take up more than 1 byte each.
+ 
+  CREATE TABLE example (
+      name VARCHAR(50)
+  );
+  INSERT INTO example (name) VALUES ('Alice'), ('Bob');
+  -- Output: 'Alice', 'Bob'
+ 
+BINARY
+•   Fixed-length binary string.
+•   Always stores exactly n bytes.
+•   If the data is shorter than n, it is padded with \0 (null bytes).
+•   Similar to CHAR(n), but for binary data.
+ 
+  CREATE TABLE test_binary (
+      bin_col BINARY(5)
+  );
+   
+  INSERT INTO test_binary (bin_col) VALUES ('abc');
+  -- Stored as: 'abc\0\0'
+ 
+VARBINARY
+•   Variable-length binary string.
+•   Stores up to n bytes.
+•   Does not pad data; just stores it as-is.
+ 
+  CREATE TABLE test_varbinary (
+      varbin_col VARBINARY(5)
+  );
+   
+  INSERT INTO test_varbinary (varbin_col) VALUES ('abc');
+  -- Stored as: 'abc'
+ 
+CHAR vs VARCHAR
+Feature
+CHAR(n)
+VARCHAR(n)
+Storage Type
+Fixed-length string
+Variable-length string
+Padding
+Pads with spaces to length n
+No padding
+Storage Size
+Always uses n bytes (plus 1 if needed)
+Uses only actual string length (plus 1 or 2 bytes for length prefix)
+Performance
+Slightly faster for fixed-length data
+More efficient for varying-length data
+Trailing Spaces
+Trailing spaces are preserved/stored
+Trailing spaces are preserved but ignored in comparison
+Max Length
+255 characters
+65,535 bytes (depending on row size and character set)
+
+BINARY vs VARBINARY
+Feature
+BINARY(n)
+VARBINARY(n)
+Length
+Fixed
+Variable
+Padding
+Pads with \0
+No padding
+Max length
+Up to 255 bytes (or more in later versions)
+Same
+Use case
+Consistent-length binary data
+Varying-length binary data
+Similar to
+CHAR(n)
+VARCHAR(n)
+
+
+ 
+TEXT Types, ENUM and SET
+Common String Data Types
+•   CHAR
+•   VARCHAR
+•   TEXT
+•   TINY TEXT
+•   MEDIUM TEXT
+•   LONG TEXT
+•   ENUM
+•   SET
+TEXT
+•   Used for larger blocks of text, ideal for storing paragraphs or longer descriptions.
+•   Can store up to 65,535 characters.
+•   Cannot have a default value and is stored outside the table row, which may impact performance for frequently queried columns.
+ 
+  CREATE TABLE example (
+      description TEXT
+  );
+  INSERT INTO example (description) VALUES ('This is a long description text.');
+  -- Output: The full text is stored as-is.
+ 
+TINYTEXT, MEDIUMTEXT, LONGTEXT
+•   These are variants of the TEXT data type with different maximum storage capacities:
+◦    TINYTEXT: up to 255 characters.
+◦    MEDIUMTEXT: up to 16,777,215 characters.
+◦    LONGTEXT: up to 4,294,967,295 characters.
+ 
+  CREATE TABLE example (
+      short_text TINYTEXT,
+      medium_text MEDIUMTEXT,
+      long_text LONGTEXT
+  );
+  INSERT INTO example (short_text, medium_text, long_text)
+  VALUES ('Short text', 'This is a medium length text.', 'This is a very long text that can hold massive content.');
+ 
+ENUM
+•   Used for a predefined list of values.
+•   Stores only one value chosen from the list.
+•   Saves space as it internally maps each value to an integer.
+ 
+  CREATE TABLE example (
+      status ENUM('active', 'inactive', 'pending')
+  );
+  INSERT INTO example (status) VALUES ('active'), ('inactive');
+  -- Output: The status field accepts only one of the specified values.
+ 
+SET
+•   Used for a predefined list of values where multiple values can be stored.
+•   Each value is stored as a bit in a set of bits, allowing for efficient storage.
+ 
+  CREATE TABLE example (
+      permissions SET('read', 'write', 'execute')
+  );
+  INSERT INTO example (permissions) VALUES ('read,write'), ('write,execute');
+  -- Output: The permissions field can store multiple values from the set.
+ 
+
+ 
+Date and Time
+DATE
+•   In SQL, DATE is a data type that stores the date. It does not store time information.
+•   The format of the date is, 'YYYY-MM-DD'. For instance, '2022-01-01'.
+•   SQL provides several functions to handle and manipulate dates.
+Create a table with DATE data type
+•   In this example, the OrderDate column uses the DATE data type to store the date of the order.
+ 
+  CREATE TABLE Orders (
+      OrderId int,
+      ProductName varchar(255),
+      OrderDate date
+  );
+ 
+Insert a date value into a table
+•   This command inserts a new row into the Orders table with a date.
+ 
+  INSERT INTO Orders (OrderId, ProductName, OrderDate)
+  VALUES (1, 'Product 1', '2022-01-01');
+ 
+Retrieve data with a specific date
+•   This command retrieves all orders made on January 1, 2022.
+ 
+  SELECT * FROM Orders
+  WHERE OrderDate = '2022-01-01';
+ 
+Date Functions
+•   In SQL, the DateTime data type is used to work with dates and times.
+•   SQL Server comes with numerous functions for processing dates and times.
+•   Some of these include:
+◦    CURDATE()
+◦    DATE_ADD()
+◦    DATE_SUB()
+◦    DATEDIFF()
+CURRENT_DATE()
+•   Returns the current date.
+ 
+  SELECT CURDATE();
+ 
+DATEADD() & DATESUB()
+•   Add or subtract a specified time interval from a date.
+ 
+  SELECT DATE_ADD('2024-01-09', INTERVAL 3 MONTHS)
+  SELECT DATE_SUB('2024-01-09', INTERVAL 3 MONTHS)
+ 
+DATEDIFF()
+•   Get the difference between two dates.
+ 
+  SELECT DATEDIFF('2024-01-09', '2024-01-14')
+ 
+TIME
+•   In SQL, TIME data type is used to store time values in the database.
+•   It allows you to store hours, minutes, and seconds.
+•   The format of a TIME is 'HH:MI:SS'.
+Syntax
+ 
+  CREATE TABLE table_name (
+      column_name TIME
+  );
+ 
+Inserting Data
+•   This command inserts a new row into the Orders table with a TIME.
+Syntax
+ 
+  INSERT INTO table_name (column_name) values ('17:34:20');
+ 
+Time Functions
+•   SQL provides several functions to work with the TIME data type. Some of them include:
+◦    CURTIME()
+◦    ADDTIME()
+◦    SUBTIME()
+CURTIME()
+•   Returns the current Time
+ 
+  SELECT CURTIME();
+ 
+ADDTIME() & SUBTIME()
+•   Add and Subtract time values
+ 
+  SELECT ADDTIME('11:30:45', '15:30:45')
+  SELECT SUBTIME('11:30:45', '15:30:45')
+ 
+TIMESTAMP
+•   SQL TIMESTAMP is a data type that allows you to store both date and time.
+•   It is typically used to track updates and changes made to a record, providing a chronological time of happenings.
+•   The format is as follows: 'YYYY-MM-DD HH:MI:SS'
+Creating Table
+Basic TIMESTAMP column:
+ 
+  CREATE TABLE table_name (
+      column1 TIMESTAMP,
+      column2 VARCHAR(100),
+      ...
+  );
+ 
+With a default value of the current timestamp:
+ 
+  CREATE TABLE table_name (
+      column1 TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      column2 VARCHAR(100),
+      ...
+  );
+ 
+UPDATE CURRENT_TIMESTAMP
+•   In MySQL, ON UPDATE CURRENT_TIMESTAMP can be used to automatically update the TIMESTAMP field to the current date and time whenever there is any change in other fields of the row.
+ 
+  CREATE TABLE table_name (
+      column1 TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+      column2 VARCHAR(100),
+      ...
+  );
+ 
+
+
+
+CREATE DATABASE PFS8;
+
+DROP DATABASE PFS8;
+
+CREATE SCHEMA DA8;
+
+SHOW DATABASES;
+
+USE DA8;
+
+CREATE TABLE EMPLOYEES(
+EMPID CHAR(5),
+FNAME VARCHAR(50),
+LNAME VARCHAR(30),
+AGE INT,
+DOJ DATE,
+ADDRESS TINYTEXT,
+DEPT VARCHAR(20)
+);
+
+DESC EMPLOYEES;
