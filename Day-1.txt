@@ -1,0 +1,134 @@
+FULLSTACK
+============
+Frontend
+=========
+frontend is the visual and interactive layer of a website  or application that users directly see and interact with through the web browser or mobile app.
+
+it is also called the client side because it runs on the users device(browser/ mobile)
+
+
+Responsibilities of Frontend
+==============================
+Displays web pages and user interface(UI).
+Accepts user input(forms,buttons,search boxes)
+validates user input before sending it to the server.
+calls Backend APIS to fetch or send data.
+Displays the response received from the backend.
+provides animations ad interactive effects.
+
+Backend
+=========
+Backend is the server-side part of an application.
+users cannot see it directly. but it preforms all business logic, security,data processing and database operations.
+
+it acts the brain of the application.
+
+Responsibilities of Backend
+==============================
+1. process clients request.
+2. implements business logic.
+3. connects with databases.
+4. preforms crud operation.
+5. authenticates and authorize users.
+6. encrypts passwords and sensitive data.
+7. generate reports
+8. returns response to the frontend.
+
+API(Application Programming Interface)
+--------------------------------------------
+An API is a set of rules and protocols that allows two different applications or systems to communicate and exchange data without exposing their internal implementation.
+
+it acts as a bridge between frontend and backend or between two different software systems.
+
+Resturant Analogy
+----------------------
+you(client)------> gives order to waiter(API)------> kitchen(Server)prepare food
+
+Kitchen ---------> gives food to waiter(API)--------> you receive your meal.
+
+
+Storage Areas
+===================
+as part of our applications we required to store data like Customers Information, or Billing information's or calls information...etc to store this data we required storage areas
+
+there are 2 types of storage areas such as
+1. Temporary Storage Areas.
+2. Permanent Storage Areas.
+
+1. Temporary Storage Areas.
+----------------------------------
+these are the Memory Areas where the data will be stored temporally.
+EG: all JVM memory areas(like Heap Area,Stack Area, Method area, PC Registers, Native Method stacks). Once JVM Shutdown all these memory areas will be cleared automatically.
+
+
+2. Permanent Storage Areas.
+------------------------------
+it is also knows as Persistent Storage Areas. here we can store data permanently.
+example: File Systems, Databases, Data Warehouses, Bigdata...eetc
+
+
+File Management System
+-----------------------
+A File Management System is a system where data is stored in Files on the Operating Systems. each application Program Must Handle its Own storage Data, retrival and updating. File Systems can be Provided by the Local Operating System.
+
+File Systems Are Best Suitable for to store very less amount of information (Like KB)
+
+Example: a Library management System storing books in separate text files likes, books.txt, members.txt
+
+Limitation Of File Management Systems
+-------------------------------------------
+1. Data Redundancy : same data is stored in multiple files.
+2. Data Inconsistency : update in One File may not be reflected in another.
+3. poor Data Security : No Proper accessed control.
+4. Difficult Data Retrieval : searching required custom programs.
+5. Integrity Issues : No Constraints(eg: rollnumber uniquness)
+6. Scalability Issues : hard to manage as data grows.
+
+to Overcome the Above Problems of File Systems, we should go for Databases.
+
+Database Management System
+-----------------------------
+ A DBMS is a Collection of programs that enables users to create,Manage and Manipulate databases.
+
+it acts as an interface between users and database.
+
+Advantages
+--------------
+1. we can store huge amount of information in databases
+2. Query Language support is available 
+3. inside database data will stored in the form of tables. while developing database tables database admin fallows various normalization techniques. and we can implement various constraints like unique key constraint, primary key constraint..etc which prevent data duplication. hence there is no chance of data inconsistency problems.
+4. to accesses data present in the database compulsory username and password must be required hence data is secured.
+
+
+What is the differences between FMS and DBMS ?(IQ)
+==================================================
+1. Data is Stored in Separate Files
+   Data is stored and managed in a database.
+
+2. High data redundancy may occur.
+   Data redundancy can be reduced using proper database Design and Normalization.
+
+3. Data is Comparatively difficult to manage and manipulate.
+   Data is easier to maintain and update using DBMS tools and Queries.
+
+4. Security and accessed control are generally limited.
+   provides Authentication and Authorization, roles and accesses control mechanisms.
+
+5. Data Sharing and concurrent accessed are more difficult to manage.
+   multiple users can accessed and manage data simultaneously with concurrency control.
+
+6. relationships between data stored in separate files not inherently managed
+   supports relationships between tables using keys such as primary key and Foreign key.
+
+7. Backup and recovery are generally manual or difficult to manage.
+   provides backup and recovery mechanism.
+
+8. Data Inconsistency may occur and integrity is difficult to enforce.
+  provides mechanism to maintain data consistency and integrity using constraints and transactions.
+
+9. suitable for simple applications with limited data management requirements.
+     suitable for small, medium and large applications, depending on the DBMS and Architecture.
+
+Q: What is the difference between a File System and a DBMS?(IQ)
+-------------------------------------------------------------
+a file system stores data in separate files and may lead data redundancy and security issues. ADBMS stores data in structured manner using tables, reduces redundancy, provides security, supports multiple Users and Ensures data consistency and integrity.
