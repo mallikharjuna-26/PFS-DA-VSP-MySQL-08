@@ -1,0 +1,81 @@
+Client-Server-Arch
+======================
+Client
+---------
+the role of the client in client-server-arch is to send request to the server. and to ger response from the server.
+
+Server :- Server is a software the role of the server in client-server arch is to take request from clients. if the request is a valid request it will generate some response and we can handover that response to the client. if the request is not a valid request it will raise the errors.
+
+Protocol
+----------
+it has a set of rules and regulations. the role of the protocol in client-server arch is to send request from client to server.'
+
+
+what is data,field,record,database?
+---------------------------------------
+what is data?
+----------------
+raw facts or figures without context.
+ex: 101,ravi,50000,hyd
+
+what is field?
+-----------------
+smallest unit of data in a database(column/attribute)
+example: empid,empname,empsalary,empaddress
+
+what is record?
+---------------
+collection related fields(row/tuple)
+example:(101,ravi,50000,hyd)
+
+what is database?
+----------------
+organized collection of related records stored together.
+example: an employee database contain all employee records.
+
+Data vs Database vs DBMS
+----------------------------
+Data : data is a collection of raw facts and figures. it can be a name,number,date,marks
+
+Database : a database is an organized collection of related data stored together. so that it can be easily accessed, managed and updated.
+example:
+--------
+banking database.
+hospital database
+online shopping database.
+
+DBMS : DBMS Stands for Database Management System.
+A DBMS is a software used to create, store,retrive, update and manage databases.
+examples: MYSQL, ORACLE,DB2,PostgreSQL..etc
+
+
+SQL Identifiers And Rules
+---------------------------
+SQL identifiers are names used to identify database Objects such as
+database names, table names,column names, view names, index names,stored procedures, trigger names.
+
+while declaring an identifiers we have to fallow certain rules and regulations.
+
+1. the only allowed characters to declare identifiers are A-Z OR a-z, $,_
+2. identifiers are should not start with digit.
+3. spaces are not considered to declare identifiers.
+4. we can't declare identifiers with reserved words.
+5. the maximum length to declare identifiers are 15.
+
+examples
+---------
+valid identifiers
+---------------
+student
+student_name
+_student
+$salary
+Employee_123
+
+Invalid Identifiers
+-----------------------
+123student
+student name
+select
+employee-name 
+-----------------------
