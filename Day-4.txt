@@ -1,0 +1,350 @@
+Day-4
+mysql> USE PFS8;
+Database changed
+mysql> CREATE TABLE EMPLOYEES(
+    -> EMPID CHAR(5),
+    -> FNAME VARCHAR(100),
+    -> LNAME VARCHAR(60),
+    -> AGE INT,
+    -> DOJ DATE,
+    -> ADDRESS TINYTEXT,
+    -> DEPT VARCHAR(50)
+    -> );
+Query OK, 0 rows affected (0.30 sec)
+
+mysql> DESC EMPLOYEES;
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| EMPID   | char(5)      | YES  |     | NULL    |       |
+| FNAME   | varchar(100) | YES  |     | NULL    |       |
+| LNAME   | varchar(60)  | YES  |     | NULL    |       |
+| AGE     | int          | YES  |     | NULL    |       |
+| DOJ     | date         | YES  |     | NULL    |       |
+| ADDRESS | tinytext     | YES  |     | NULL    |       |
+| DEPT    | varchar(50)  | YES  |     | NULL    |       |
++---------+--------------+------+-----+---------+-------+
+7 rows in set (0.04 sec)
+
+mysql> -- ALTER 
+mysql> -- MODIFY THE FNAME COLUMN IN EMPLOYEES TABLE TO VARCHAR(70)
+mysql> -- SYNTAX : ALTER TABLE TABLE-NAME MODIFY COLUMN-NAME DATATYPE SIZE.
+mysql> ALTER TABLE EMPLOYEES MODIFY FNAME VARCHAR(70);
+Query OK, 0 rows affected (0.34 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC EMPLOYEES;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| EMPID   | char(5)     | YES  |     | NULL    |       |
+| FNAME   | varchar(70) | YES  |     | NULL    |       |
+| LNAME   | varchar(60) | YES  |     | NULL    |       |
+| AGE     | int         | YES  |     | NULL    |       |
+| DOJ     | date        | YES  |     | NULL    |       |
+| ADDRESS | tinytext    | YES  |     | NULL    |       |
+| DEPT    | varchar(50) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+7 rows in set (0.01 sec)
+
+mysql> ALTER TABLE EMPLOYEES MODIFY LNAME VARCHAR(80);
+Query OK, 0 rows affected (2.27 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC EMPLOYEES;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| EMPID   | char(5)     | YES  |     | NULL    |       |
+| FNAME   | varchar(70) | YES  |     | NULL    |       |
+| LNAME   | varchar(80) | YES  |     | NULL    |       |
+| AGE     | int         | YES  |     | NULL    |       |
+| DOJ     | date        | YES  |     | NULL    |       |
+| ADDRESS | tinytext    | YES  |     | NULL    |       |
+| DEPT    | varchar(50) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+7 rows in set (0.01 sec)
+
+mysql> -- ADD A NEW COLUMN NAAMED WITH LOCATION OF TYPE TINYTEXT TO THE EMPLOYEES TABLE.
+mysql> -- SYNTAX : ALTER TABLE TABLE-NAME ADD COLUMN-NAME DATATYPE(SIZE)
+mysql> ALTER TABLE EMPLOYEE ADD LOCATION TINYTEXT;
+ERROR 1146 (42S02): Table 'pfs3.employee' doesn't exist
+mysql> ALTER TABLE EMPLOYEES ADD LOCATION TINYTEXT;
+Query OK, 0 rows affected (0.34 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC EMPLOYEES;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| EMPID    | char(5)     | YES  |     | NULL    |       |
+| FNAME    | varchar(70) | YES  |     | NULL    |       |
+| LNAME    | varchar(80) | YES  |     | NULL    |       |
+| AGE      | int         | YES  |     | NULL    |       |
+| DOJ      | date        | YES  |     | NULL    |       |
+| ADDRESS  | tinytext    | YES  |     | NULL    |       |
+| DEPT     | varchar(50) | YES  |     | NULL    |       |
+| LOCATION | tinytext    | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+8 rows in set (0.04 sec)
+
+mysql> -- TO ADD A COLUMN AFTER A PARTICULAR COLUMN
+mysql> -- SYNTAX : ALTER TABLE TABLE-NAME ADD COLUMN-NAME AFTER SPECIFIED-COLUMN NAME
+mysql> ALTER TABLE EMPLOYEES ADD PFID INT AFTER ADDRESS;
+Query OK, 0 rows affected (0.14 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC EMPLOYEES;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| EMPID    | char(5)     | YES  |     | NULL    |       |
+| FNAME    | varchar(70) | YES  |     | NULL    |       |
+| LNAME    | varchar(80) | YES  |     | NULL    |       |
+| AGE      | int         | YES  |     | NULL    |       |
+| DOJ      | date        | YES  |     | NULL    |       |
+| ADDRESS  | tinytext    | YES  |     | NULL    |       |
+| PFID     | int         | YES  |     | NULL    |       |
+| DEPT     | varchar(50) | YES  |     | NULL    |       |
+| LOCATION | tinytext    | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+9 rows in set (0.02 sec)
+
+mysql> -- RENAME THE FNAME COLUMN TO FIRSTNAME IN THE EMPLOYEES TABLE;
+mysql> -- SYNTAX : ALTER TABLE TABLE-NAME CHANGE EXISTING-COLUMN-NAME NEW COLUMN-NAME DATATYPE(SIZE)
+mysql> ALTER TABLE EMPLOYEES CHANGE COLUMN FNAME FIRSTNAME VARCHAR(30);
+Query OK, 0 rows affected (0.11 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC EMPLOYEES;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| EMPID     | char(5)     | YES  |     | NULL    |       |
+| FIRSTNAME | varchar(30) | YES  |     | NULL    |       |
+| LNAME     | varchar(80) | YES  |     | NULL    |       |
+| AGE       | int         | YES  |     | NULL    |       |
+| DOJ       | date        | YES  |     | NULL    |       |
+| ADDRESS   | tinytext    | YES  |     | NULL    |       |
+| PFID      | int         | YES  |     | NULL    |       |
+| DEPT      | varchar(50) | YES  |     | NULL    |       |
+| LOCATION  | tinytext    | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+9 rows in set (0.00 sec)
+
+mysql> ALTER TABLE EMPLOYEES CHANGE COLUMN LNAME LASTNAME VARCHAR(30);
+Query OK, 0 rows affected (0.20 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC EMPLOYEES;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| EMPID     | char(5)     | YES  |     | NULL    |       |
+| FIRSTNAME | varchar(30) | YES  |     | NULL    |       |
+| LASTNAME  | varchar(30) | YES  |     | NULL    |       |
+| AGE       | int         | YES  |     | NULL    |       |
+| DOJ       | date        | YES  |     | NULL    |       |
+| ADDRESS   | tinytext    | YES  |     | NULL    |       |
+| PFID      | int         | YES  |     | NULL    |       |
+| DEPT      | varchar(50) | YES  |     | NULL    |       |
+| LOCATION  | tinytext    | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+9 rows in set (0.01 sec)
+
+mysql> -- HOW TO DROP A COLUMN
+mysql> -- SYNTAX : ALTER TABLE TABLE-NAME DROP COLUMN COLUMN-NAME
+mysql> -- DROP THE COLUMN PFID IN EMPLOYEES TABLE
+mysql> ALTER TABLE EMPLOYEES DROP COLUMN PFI;
+ERROR 1091 (42000): Can't DROP 'PFI'; check that column/key exists
+mysql> ALTER TABLE EMPLOYEES DROP COLUMN PFID;
+Query OK, 0 rows affected (0.10 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC EMPLOYEES;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| EMPID     | char(5)     | YES  |     | NULL    |       |
+| FIRSTNAME | varchar(30) | YES  |     | NULL    |       |
+| LASTNAME  | varchar(30) | YES  |     | NULL    |       |
+| AGE       | int         | YES  |     | NULL    |       |
+| DOJ       | date        | YES  |     | NULL    |       |
+| ADDRESS   | tinytext    | YES  |     | NULL    |       |
+| DEPT      | varchar(50) | YES  |     | NULL    |       |
+| LOCATION  | tinytext    | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+8 rows in set (0.03 sec)
+
+mysql> ALTER TABLE EMPLOYEES DROP COLUMN LOCATION;
+Query OK, 0 rows affected (0.11 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC EMPLOYEES;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| EMPID     | char(5)     | YES  |     | NULL    |       |
+| FIRSTNAME | varchar(30) | YES  |     | NULL    |       |
+| LASTNAME  | varchar(30) | YES  |     | NULL    |       |
+| AGE       | int         | YES  |     | NULL    |       |
+| DOJ       | date        | YES  |     | NULL    |       |
+| ADDRESS   | tinytext    | YES  |     | NULL    |       |
+| DEPT      | varchar(50) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> -- HOW TO CHANGE TABLE -NAME
+mysql> -- SYNTAX : ALTER TABLE TABLE-NAME RENAME TO NEW-TABLE-NAME
+mysql> -- CHANGE THE TABLE NAME EMPLOYEES TO CODEGNAN_EMP TABLE
+mysql> ALTER TABLE EMPLOYEES RENAME TO CODEGNAN_EMP;
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> DESC EMPLOYEES;
+ERROR 1146 (42S02): Table 'pfs3.employees' doesn't exist
+mysql> SHOW TABLES;
++----------------+
+| Tables_in_pfs3 |
++----------------+
+| codegnan_emp   |
++----------------+
+1 row in set (0.03 sec)
+
+mysql> DESC CODEGNAN_EMP;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| EMPID     | char(5)     | YES  |     | NULL    |       |
+| FIRSTNAME | varchar(30) | YES  |     | NULL    |       |
+| LASTNAME  | varchar(30) | YES  |     | NULL    |       |
+| AGE       | int         | YES  |     | NULL    |       |
+| DOJ       | date        | YES  |     | NULL    |       |
+| ADDRESS   | tinytext    | YES  |     | NULL    |       |
+| DEPT      | varchar(50) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> ALTER TABLE CODEGNAN_EMP RENAME TO EMPLOYEES;
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> SHOW TABLES;
++----------------+
+| Tables_in_pfs3 |
++----------------+
+| employees      |
++----------------+
+1 row in set (0.01 sec)
+
+mysql> NOTE
+
+
+Part A: Create Table Assignment
+Create a table named company_staff.
+Add the following columns to the table:
+ emp_id, age, experience, gender, emp_name, address, salary, department, skills, joining_date.
+Use INT datatype for emp_id.
+Use TINYINT datatype for age.
+Use SMALLINT datatype for experience.
+Use CHAR(1) datatype for gender.
+Use VARCHAR(50) datatype for emp_name.
+Use TINYTEXT datatype for address.
+Use DECIMAL(10,2) datatype for salary.
+Use ENUM('HR','IT','Sales','Finance','Support') datatype for the department.
+Use SET('Java','Python','SQL','Excel','Communication') datatype for skills.
+Use DATE datatype for joining_date.
+Make emp_id as PRIMARY KEY.
+Display the structure of the table after creation.
+Show all tables available in the database.
+
+CREATE TABLE company_staff (
+    emp_id INT primary key ,
+    age TINYINT,
+    experience SMALLINT,
+    gender CHAR(1),
+    emp_name VARCHAR(50),
+    address TINYTEXT,
+    salary DECIMAL(10,2),
+    department ENUM('HR','IT','Sales','Finance','Support'),
+    skills SET('Java','Python','SQL','Excel','Communication'),
+    joining_date DATE
+);
+
+
+
+Q1. Add a New Column
+Write a SQL query to add a new column named email to the company_staff table. The column should store email addresses with a maximum length of 100 characters.
+ALTER TABLE company_staff
+ADD email VARCHAR(100);
+
+Q2. Add Phone Number Column
+Write a SQL query to add a column named phone_number to the company_staff table. The column should use the BIGINT data type.
+ALTER TABLE company_staff
+ADD phone_number BIGINT;
+
+Q3. Add Bonus Column After Salary
+Write a SQL query to add a column named bonus to the company_staff table with the data type DECIMAL(8,2). Place the bonus column immediately after the salary column.
+ALTER TABLE company_staff
+ADD bonus DECIMAL(8,2) AFTER salary;
+
+Q4. Add Status Column After Department
+Write a SQL query to add a column named status with the data type VARCHAR(20). The column should be placed immediately after the department column.
+ALTER TABLE company_staff
+ADD status VARCHAR(20) AFTER department;
+
+Q5. Add Company Name as the First Column
+Write a SQL query to add a column named company_name with the data type VARCHAR(50). Place this column as the first column in the company_staff table.
+ALTER TABLE company_staff
+ADD company_name VARCHAR(50) FIRST;
+
+Q6. Add Qualification Column
+Write a SQL query to add a column named qualification with the data type VARCHAR(50). Place the column immediately after the emp_name column.
+ALTER TABLE company_staff
+ADD qualification VARCHAR(50) AFTER emp_name;
+
+Q7. Modify Employee Name Column
+Write a SQL query to modify the emp_name column so that it can store a maximum of 100 characters.
+ALTER TABLE company_staff
+MODIFY emp_name VARCHAR(100);
+
+Q8. Modify Salary Column
+Write a SQL query to modify the salary column so that its data type becomes DECIMAL(12,2).
+ALTER TABLE company_staff
+MODIFY salary DECIMAL(12,2);
+
+Q9. Rename Employee Name Column
+Write a SQL query to rename the emp_name column to employee_name.
+ALTER TABLE company_staff
+RENAME COLUMN emp_name TO employee_name;
+
+Q10. Rename Joining Date Column
+Write a SQL query to rename the joining_date column to date_of_joining.
+ALTER TABLE company_staff
+RENAME COLUMN joining_date TO date_of_joining;
+
+Q11. Drop Bonus Column
+Write a SQL query to remove the bonus column from the company_staff table.
+ALTER TABLE company_staff
+DROP COLUMN bonus;
+
+Q12. Drop Phone Number Column
+Write a SQL query to remove the phone_number column from the company_staff table
+ALTER TABLE company_staff
+DROP COLUMN phone_number;
+
+Q13. Rename the Table
+Write a SQL query to rename the table company_staff to staff_records.
+ALTER TABLE company_staff
+RENAME TO staff_records;
+
+Q14. Rename the Table Back
+After renaming the table to staff_records, write a SQL query to rename it back to company_staff.
+ALTER TABLE staff_records
+RENAME TO company_staff;
+
+Q15. Add Last Updated Column
+Write a SQL query to add a column named last_updated with the data type DATE. Place the last_updated column immediately after the skills column.
+ALTER TABLE company_staff
+ADD last_updated DATE after skills;
+
+
+
