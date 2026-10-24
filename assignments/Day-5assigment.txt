@@ -1,0 +1,64 @@
+1. Create a table named employees with the columns emp_id, emp_name, department, job_role, salary, joining_date, and city.
+2. Insert the given 10 employee records into the employees table.
+
+CREATE TABLE employees (
+    emp_id INT PRIMARY KEY,
+    emp_name VARCHAR(100),
+    department VARCHAR(50),
+    job_role VARCHAR(50),
+    salary DECIMAL(10,2),
+    joining_date DATE,
+    city VARCHAR(50)
+);
+
+
+INSERT INTO employees
+(emp_id, emp_name, department, job_role, salary, joining_date, city)
+VALUES
+(101, 'Ravi Kumar', 'IT', 'Developer', 45000, '2023-01-15', 'Vizag'),
+(102, 'Priya Sharma', 'HR', 'HR Manager', 55000, '2022-06-20', 'Hyderabad'),
+(103, 'Kiran Reddy', 'IT', 'Tester', 40000, '2023-03-10', 'Vizag'),
+(104, 'Sneha Rao', 'Finance', 'Accountant', 48000, '2021-11-25', 'Chennai'),
+(105, 'Arun Kumar', 'IT', 'Developer', 60000, '2020-08-18', 'Bangalore'),
+(106, 'Divya Reddy', 'HR', 'Recruiter', 35000, '2024-01-05', 'Vizag'),
+(107, 'Suresh Babu', 'Sales', 'Executive', 42000, '2022-09-12', 'Hyderabad'),
+(108, 'Anjali Devi', 'IT', 'Developer', 70000, '2019-05-30', 'Chennai'),
+(109, 'Mahesh Kumar', 'Sales', 'Manager', 65000, '2020-02-14', 'Bangalore'),
+(110, 'Lakshmi Rao', 'Finance', 'Analyst', 52000, '2023-07-22', 'Hyderabad');
+
+
+Update Questions
+1. Update the salary of Ravi Kumar to 50000.
+2. Increase the salary by 10% for all IT employees.
+3. Change Priya Sharma's city to Vizag.
+4. Change Kiran Reddy's job role to Senior Tester.
+5. Increase the salary by 5000 for all HR employees.
+6. Change the city of all employees working in Vizag to Hyderabad.
+7. Change Arun Kumar's department to Development.
+8. Increase the salary by 15% for employees earning less than 45000.
+9. Change Anjali Devi's job role to Senior Developer.
+10. Update the city of all Finance employees to Bangalore.
+
+Delete Questions
+1. Delete the employee whose ID is 106.
+2. Delete all employees from the Finance department.
+3. Delete employees earning less than 40000.
+4. Delete all employees working in Vizag.
+5. Delete the employee named Suresh Babu.
+6. Delete employees who joined before January 1, 2020.
+7. Delete all employees working as Recruiters.
+8. Delete employees from the Sales department earning less than 50000.
+9. Delete the employee or employees who have the lowest salary.
+10. Delete all employees whose city is Chennai.
+
+Select (DQL) Questions
+1. Display all employees from the employees table.
+2. Display employees working in the IT department.
+3. Display employees earning more than 50000.
+4. Display only employee names and salaries.
+5. Display employees who are from Vizag.
+6. Display employees who joined after January 1, 2022.
+7. Display employees earning between 40000 and 60000.
+8. Display employees whose names end with Kumar.
+9. Display all employees in descending order of salary.
+10. Display the highest-paid employee.
