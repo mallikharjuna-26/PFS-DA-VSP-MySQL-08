@@ -1,0 +1,305 @@
+DML - Data Manipulation Language
+DML commands are used to insert, update, delete, and manage data stored inside existing database tables. Unlike DDL, DML changes can typically be rolled back if not committed.
+Command
+Description / Definition
+INSERT
+Adds new rows/records of data into a table. Example: INSERT INTO Students (ID, Name) VALUES (1, 'Ravi');
+UPDATE
+Modifies existing records in a table by changing the values of one or more columns based on a specified condition. Example: UPDATE Students SET Name='Kumar' WHERE ID=1;
+DELETE
+Removes one or more existing rows from a table based on a specified condition, while keeping the table structure. Can be rolled back if used within a transaction.
+
+
+
+
+approach-1
+---------------
+INSERT INTO TABLE-NAME(column1,column2.....column-n) values(value1,value2....valuen);
+INSERT INTO EMPLOYEES(EMPID,FIRSTNAME,LASTNAME,AGE,DOJ,ADDRESS,DEPT)
+VALUES
+('E001','MALLI','ARJUN',27,'2024-03-20','HYD','JAVA');
+SELECT*FROM EMPLOYEES;
+| EMPID | FIRSTNAME | LASTNAME | AGE  | DOJ        | ADDRESS | DEPT |
+| E001  | MALLI     | ARJUN    |   27 | 2024-03-20 | HYD     | JAVA |
+INSERT INTO EMPLOYEES(EMPID,FIRSTNAME,LASTNAME,AGE,DOJ,ADDRESS,DEPT)
+VALUES
+('E002','ARJUN','SARKAR',37,'2022-02-20','VJY','SALES'),
+('E003','SAI','VARDAN',22,'2024-03-18','HYD','PYTHON');
+SELECT*FROM EMPLOYEES;
+| EMPID | FIRSTNAME | LASTNAME | AGE  | DOJ        | ADDRESS | DEPT   |
+| E001  | MALLI     | ARJUN    |   27 | 2024-03-20 | HYD     | JAVA   |
+| E002  | ARJUN     | SARKAR   |   37 | 2022-02-20 | VJY     | SALES  |
+| E003  | SAI       | VARDAN   |   22 | 2024-03-18 | HYD     | PYTHON |
+Approac-2
+------------
+insert into table-name values(value1,value2....value-n);
+INSERT INTO EMPLOYEES VALUES
+('E004','SUMA','SRI',24,'2025-10-10','BNG','DEVELOPMENT');
+INSERT INTO EMPLOYEES VALUES
+('E005','MANI','SHARMA',17,'2020-09-09','MUMBAI','MARKETING'),
+('E006','MOUNIKA','KOPPU',27,'2019-11-11','PUNE','FINANCE');
+SELECT*FROM EMPLOYEES;
+| EMPID | FIRSTNAME | LASTNAME | AGE  | DOJ        | ADDRESS | DEPT        |
+| E001  | MALLI     | ARJUN    |   27 | 2024-03-20 | HYD     | JAVA        |
+| E002  | ARJUN     | SARKAR   |   37 | 2022-02-20 | VJY     | SALES       |
+| E003  | SAI       | VARDAN   |   22 | 2024-03-18 | HYD     | PYTHON      |
+| E004  | SUMA      | SRI      |   24 | 2025-10-10 | BNG     | DEVELOPMENT |
+| E005  | MANI      | SHARMA   |   17 | 2020-09-09 | MUMBAI  | MARKETING   |
+| E006  | MOUNIKA   | KOPPU    |   27 | 2019-11-11 | PUNE    | FINANCE     |
+INSERT INTO EMPLOYEES VALUES
+('E004','SUMA','SRI',24,'2025-10-10','BNG','DEVELOPMENT');
+INSERT INTO EMPLOYEES VALUES
+('E005','MANI','SHARMA',17,'2020-09-09','MUMBAI','MARKETING'),
+('E006','MOUNIKA','KOPPU',27,'2019-11-11','PUNE','FINANCE');
+SELECT*FROM EMPLOYEES;
+| EMPID | FIRSTNAME | LASTNAME | AGE  | DOJ        | ADDRESS | DEPT        |
+| E001  | MALLI     | ARJUN    |   27 | 2024-03-20 | HYD     | JAVA        |
+| E002  | ARJUN     | SARKAR   |   37 | 2022-02-20 | VJY     | SALES       |
+| E003  | SAI       | VARDAN   |   22 | 2024-03-18 | HYD     | PYTHON      |
+| E004  | SUMA      | SRI      |   24 | 2025-10-10 | BNG     | DEVELOPMENT |
+| E005  | MANI      | SHARMA   |   17 | 2020-09-09 | MUMBAI  | MARKETING   |
+| E006  | MOUNIKA   | KOPPU    |   27 | 2019-11-11 | PUNE    | FINANCE     |
+note
+Approach-3
+---------------
+insert into table-name(particular columns you required) values(particular values);
+INSERT INTO EMPLOYEES(FIRSTNAME,DOJ,LASTNAME,EMPID,ADDRESS)
+VALUES
+('SAI','2017-07-07','RAM','E008','VIJAYAWADA');
+Approach-4
+------------
+Insert into taable-name set Column-name=value,column-name=value,...... column-n=valuen;
+INSERT INTO EMPLOYEES SET EMPID='E010',FIRSTNAME='SUDHEER',LASTNAME='KUMAR',AGE=45,DOJ='2024-06-01',ADDRESS='KOLKATTA',DEPT='DEVELOPMENT';
+SELECT*FROM EMPLOYEES;
+| EMPID | FIRSTNAME | LASTNAME | AGE  | DOJ        | ADDRESS    | DEPT        |
+| E001  | MALLI     | ARJUN    |   27 | 2024-03-20 | HYD        | JAVA        |
+| E002  | ARJUN     | SARKAR   |   37 | 2022-02-20 | VJY        | SALES       |
+| E003  | SAI       | VARDAN   |   22 | 2024-03-18 | HYD        | PYTHON      |
+| E004  | SUMA      | SRI      |   24 | 2025-10-10 | BNG        | DEVELOPMENT |
+| E005  | MANI      | SHARMA   |   17 | 2020-09-09 | MUMBAI     | MARKETING   |
+| E006  | MOUNIKA   | KOPPU    |   27 | 2019-11-11 | PUNE       | FINANCE     |
+| e007  | sai       | kiran    |   32 | 2018-09-12 | pune       | admin       |
+| E008  | SAI       | RAM      | NULL | 2017-07-07 | VIJAYAWADA | NULL        |
+| E009  | ARUN      | NULL     |   15 | NULL       | DELHI      | TRAINEE     |
+| E010  | SUDHEER   | KUMAR    |   45 | 2024-06-01 | KOLKATTA   | DEVELOPMENT |
+UPDATE
+=========
+SYNTAX
+--------
+UPDATE TABLE-NAME SET COLUMN-NAME=VALUE WHERE CONDITION;
+UPDATE EMPLOYEES SET LASTNAME='KUMAR' WHERE FIRSTNAME='ARUN';
+SELECT*FROM EMPLOYEES;
+| EMPID | FIRSTNAME | LASTNAME | AGE  | DOJ        | ADDRESS    | DEPT        |
+| E001  | MALLI     | ARJUN    |   27 | 2024-03-20 | HYD        | JAVA        |
+| E002  | ARJUN     | SARKAR   |   37 | 2022-02-20 | VJY        | SALES       |
+| E003  | SAI       | VARDAN   |   22 | 2024-03-18 | HYD        | PYTHON      |
+| E004  | SUMA      | SRI      |   24 | 2025-10-10 | BNG        | DEVELOPMENT |
+| E005  | MANI      | SHARMA   |   17 | 2020-09-09 | MUMBAI     | MARKETING   |
+| E006  | MOUNIKA   | KOPPU    |   27 | 2019-11-11 | PUNE       | FINANCE     |
+| e007  | sai       | kiran    |   32 | 2018-09-12 | pune       | admin       |
+| E008  | SAI       | RAM      | NULL | 2017-07-07 | VIJAYAWADA | NULL        |
+| E009  | ARUN      | KUMAR    |   15 | NULL       | DELHI      | TRAINEE     |
+| E010  | SUDHEER   | KUMAR    |   45 | 2024-06-01 | KOLKATTA   | DEVELOPMENT |
+UPDATE EMPLOYEES SET AGE=47 WHERE EMPID='E008';
+SELECT*FROM EMPLOYEES;
+| EMPID | FIRSTNAME | LASTNAME | AGE  | DOJ        | ADDRESS    | DEPT        |
+| E001  | MALLI     | ARJUN    |   27 | 2024-03-20 | HYD        | JAVA        |
+| E002  | ARJUN     | SARKAR   |   37 | 2022-02-20 | VJY        | SALES       |
+| E003  | SAI       | VARDAN   |   22 | 2024-03-18 | HYD        | PYTHON      |
+| E004  | SUMA      | SRI      |   24 | 2025-10-10 | BNG        | DEVELOPMENT |
+| E005  | MANI      | SHARMA   |   17 | 2020-09-09 | MUMBAI     | MARKETING   |
+| E006  | MOUNIKA   | KOPPU    |   27 | 2019-11-11 | PUNE       | FINANCE     |
+| e007  | sai       | kiran    |   32 | 2018-09-12 | pune       | admin       |
+| E008  | SAI       | RAM      |   47 | 2017-07-07 | VIJAYAWADA | NULL        |
+| E009  | ARUN      | KUMAR    |   15 | NULL       | DELHI      | TRAINEE     |
+| E010  | SUDHEER   | KUMAR    |   45 | 2024-06-01 | KOLKATTA   | DEVELOPMENT |
+UPDATE EMPLOYEES SET DEPT='IT' WHERE ADDRESS='VIJAYAWADA';
+SELECT*FROM EMPLOYEES;
+| EMPID | FIRSTNAME | LASTNAME | AGE  | DOJ        | ADDRESS    | DEPT        |
+| E001  | MALLI     | ARJUN    |   27 | 2024-03-20 | HYD        | JAVA        |
+| E002  | ARJUN     | SARKAR   |   37 | 2022-02-20 | VJY        | SALES       |
+| E003  | SAI       | VARDAN   |   22 | 2024-03-18 | HYD        | PYTHON      |
+| E004  | SUMA      | SRI      |   24 | 2025-10-10 | BNG        | DEVELOPMENT |
+| E005  | MANI      | SHARMA   |   17 | 2020-09-09 | MUMBAI     | MARKETING   |
+| E006  | MOUNIKA   | KOPPU    |   27 | 2019-11-11 | PUNE       | FINANCE     |
+| e007  | sai       | kiran    |   32 | 2018-09-12 | pune       | admin       |
+| E008  | SAI       | RAM      |   47 | 2017-07-07 | VIJAYAWADA | IT          |
+| E009  | ARUN      | KUMAR    |   15 | NULL       | DELHI      | TRAINEE     |
+| E010  | SUDHEER   | KUMAR    |   45 | 2024-06-01 | KOLKATTA   | DEVELOPMENT |
+UPDATE EMPLOYEES SET DOJ='2026-06-27' WHERE EMPID='E009';
+SELECT*FROM EMPLOYEES;
+| EMPID | FIRSTNAME | LASTNAME | AGE  | DOJ        | ADDRESS    | DEPT        |
+| E001  | MALLI     | ARJUN    |   27 | 2024-03-20 | HYD        | JAVA        |
+| E002  | ARJUN     | SARKAR   |   37 | 2022-02-20 | VJY        | SALES       |
+| E003  | SAI       | VARDAN   |   22 | 2024-03-18 | HYD        | PYTHON      |
+| E004  | SUMA      | SRI      |   24 | 2025-10-10 | BNG        | DEVELOPMENT |
+| E005  | MANI      | SHARMA   |   17 | 2020-09-09 | MUMBAI     | MARKETING   |
+| E006  | MOUNIKA   | KOPPU    |   27 | 2019-11-11 | PUNE       | FINANCE     |
+| e007  | sai       | kiran    |   32 | 2018-09-12 | pune       | admin       |
+| E008  | SAI       | RAM      |   47 | 2017-07-07 | VIJAYAWADA | IT          |
+| E009  | ARUN      | KUMAR    |   15 | 2026-06-27 | DELHI      | TRAINEE     |
+| E010  | SUDHEER   | KUMAR    |   45 | 2024-06-01 | KOLKATTA   | DEVELOPMENT |
+INSERT INTO EMPLOYEES VALUES
+('E004','SUMA','SRI',24,'2025-10-10','BNG','DEVELOPMENT');
+INSERT INTO EMPLOYEES SET EMPID='E010',FIRSTNAME='SUDHEER',LASTNAME='KUMAR',AGE=45,DOJ='2024-06-01',ADDRESS='KOLKATTA',DEPT='DEVELOPMENT';
+SELECT*FROM EMPLOYEES;
+| EMPID | FIRSTNAME | LASTNAME | AGE  | DOJ        | ADDRESS    | DEPT        |
+| E001  | MALLI     | ARJUN    |   27 | 2024-03-20 | HYD        | JAVA        |
+| E002  | ARJUN     | SARKAR   |   37 | 2022-02-20 | VJY        | SALES       |
+| E003  | SAI       | VARDAN   |   22 | 2024-03-18 | HYD        | PYTHON      |
+| E004  | SUMA      | SRI      |   24 | 2025-10-10 | BNG        | DEVELOPMENT |
+| E005  | MANI      | SHARMA   |   17 | 2020-09-09 | MUMBAI     | MARKETING   |
+| E006  | MOUNIKA   | KOPPU    |   27 | 2019-11-11 | PUNE       | FINANCE     |
+| e007  | sai       | kiran    |   32 | 2018-09-12 | pune       | admin       |
+| E008  | SAI       | RAM      | NULL | 2017-07-07 | VIJAYAWADA | NULL        |
+| E009  | ARUN      | NULL     |   15 | NULL       | DELHI      | TRAINEE     |
+| E010  | SUDHEER   | KUMAR    |   45 | 2024-06-01 | KOLKATTA   | DEVELOPMENT |
+delete from employees where empid='e010';
+select*from employees;
+| EMPID | FIRSTNAME | LASTNAME | AGE  | DOJ        | ADDRESS    | DEPT        |
+| E001  | MALLI     | ARJUN    |   27 | 2024-03-20 | HYD        | JAVA        |
+| E002  | ARJUN     | SARKAR   |   37 | 2022-02-20 | VJY        | SALES       |
+| E003  | SAI       | VARDAN   |   22 | 2024-03-18 | HYD        | PYTHON      |
+| E004  | SUMA      | SRI      |   24 | 2025-10-10 | BNG        | DEVELOPMENT |
+| E005  | MANI      | SHARMA   |   17 | 2020-09-09 | MUMBAI     | MARKETING   |
+| E006  | MOUNIKA   | KOPPU    |   27 | 2019-11-11 | PUNE       | FINANCE     |
+| e007  | sai       | kiran    |   32 | 2018-09-12 | pune       | admin       |
+| E008  | SAI       | RAM      |   47 | 2017-07-07 | VIJAYAWADA | IT          |
+| E009  | ARUN      | KUMAR    |   15 | 2026-06-27 | DELHI      | TRAINEE     |
+delete from employees where firstname='sai';
+select*from employees;
+| EMPID | FIRSTNAME | LASTNAME | AGE  | DOJ        | ADDRESS | DEPT        |
+| E001  | MALLI     | ARJUN    |   27 | 2024-03-20 | HYD     | JAVA        |
+| E002  | ARJUN     | SARKAR   |   37 | 2022-02-20 | VJY     | SALES       |
+| E004  | SUMA      | SRI      |   24 | 2025-10-10 | BNG     | DEVELOPMENT |
+| E005  | MANI      | SHARMA   |   17 | 2020-09-09 | MUMBAI  | MARKETING   |
+| E006  | MOUNIKA   | KOPPU    |   27 | 2019-11-11 | PUNE    | FINANCE     |
+| E009  | ARUN      | KUMAR    |   15 | 2026-06-27 | DELHI   | TRAINEE     |
+truncate table employees;
+select*from employees;
+drop table employees;
+
+Drop,delete,truncate
+Delete
+========
+Step-by-Step Example in MySQL:
+Step 1: Create the Table and Insert Data
+First, create the employees table and insert sample data.
+-- Drop table if it already exists
+DROP TABLE IF EXISTS employees;
+-- Create employees table with AUTO_INCREMENT primary key
+CREATE TABLE employees (
+    employee_id INT PRIMARY KEY AUTO_INCREMENT,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    department VARCHAR(50),
+    salary DECIMAL(10, 2)
+);
+INSERT INTO employees (first_name, last_name, department, salary)
+VALUES
+('Ravi', 'Kumar', 'HR', 50000.00),
+('Anjali', 'Sharma', 'Sales', 60000.00),
+('Amit', 'Patel', 'HR', 55000.00),
+('Sneha', 'Reddy', 'Engineering', 70000.00),
+('Vikram', 'Nair', 'Sales', 65000.00);
+Step 2: Use DELETE with Rollback
+The DELETE command can be used with a transaction, and changes can be rolled back if needed.
+-- Start a transaction
+START TRANSACTION;
+-- Perform DELETE operation (delete employees from the Sales department)
+DELETE FROM employees WHERE department = 'Sales';
+-- Check the current state of the table (after DELETE but before commit or rollback)
+SELECT * FROM employees;
+-- Rollback the transaction (undo the DELETE)
+ROLLBACK;
+-- Check the data again (after rollback)
+SELECT * FROM employees;
+Expected Outcome: After ROLLBACK, no rows should be deleted from the table, and the Sales department employees will be restored.
+If you had used COMMIT instead of ROLLBACK, the changes would be permanent.
+-- COMMIT the changes if you want the DELETE to be permanent
+COMMIT;
+-- Check the data after commit
+SELECT * FROM employees;
+Expected Outcome: The employees from the Sales department would be deleted permanently.
+Step 3: Use TRUNCATE (Not Rollbackable in MySQL)
+In MySQL, TRUNCATE is a DDL (Data Definition Language) operation, not a DML (Data Manipulation Language) operation. This means it cannot be rolled back in MySQL.
+-- Start a new transaction
+START TRANSACTION;
+-- Perform TRUNCATE operation (remove all rows from the table)
+TRUNCATE TABLE employees;
+-- Check the data after TRUNCATE (before commit or rollback)
+SELECT * FROM employees;
+-- Rollback will not work here, because TRUNCATE cannot be rolled back in MySQL.
+-- Try ROLLBACK (it won't undo TRUNCATE in MySQL)
+ROLLBACK;
+-- Check the data again (it won't restore the data)
+SELECT * FROM employees;
+Expected Outcome: After TRUNCATE, the table will be empty, and ROLLBACK will have no effect because TRUNCATE in MySQL cannot be rolled back.
+If you had used COMMIT, the data would be permanently deleted.
+-- COMMIT the changes if you want the TRUNCATE to be permanent
+COMMIT;
+-- Check the data after commit
+SELECT * FROM employees;
+Expected Outcome: The table will remain empty after a successful commit of the TRUNCATE.
+Step 4: Use DROP (Not Rollbackable in MySQL)
+In MySQL, DROP is also a DDL command and cannot be rolled back once executed. It will completely remove the table from the database.
+-- Start a new transaction
+START TRANSACTION;
+-- Perform DROP operation (remove the employees table)
+DROP TABLE employees;
+-- Check if the table still exists (before commit or rollback)
+SELECT * FROM employees; -- This will give an error because the table no longer exists
+-- Rollback will not work here, because DROP cannot be rolled back in MySQL.
+ROLLBACK;
+-- Try checking the data again (it won't restore the table)
+SELECT * FROM employees; -- This will give an error again
+Expected Outcome: After DROP, the table is removed from the database, and ROLLBACK will not restore the table, because DROP is not rollbackable in MySQL.
+If you had used COMMIT, the table would be permanently removed.
+-- COMMIT the changes if you want the DROP to be permanent
+COMMIT;
+-- Attempting to check the table will result in an error, as it no longer exists.
+SELECT * FROM employees; -- Error: Table doesn't exist
+Summary:
+DELETE: Can be rolled back within a transaction.
+TRUNCATE: Cannot be rolled back in MySQL (it’s treated as a DDL command).
+DROP: Cannot be rolled back in MySQL (it’s a DDL command that completely removes the table).
+To safely perform actions that can be rolled back in MySQL, you should rely on DELETE within transactions. TRUNCATE and DROP are permanent changes in MySQL and cannot be undone unless you have backups or restore points.
+
+Key Differences Summary:
+
+Action
+
+DROP Removes the table or object
+DELETE Removes specific rows from a table
+TRUNCATE Removes all rows, keeps structure
+
+
+Data Removed
+
+DROP Table structure + data
+DELETE Specific rows (based on WHERE)
+TRUNCATE All rows
+
+Table Structure
+
+DROP Removed
+DELETE Intact
+TRUNCATE Intact
+
+Performance
+
+DROP Slow (due to full removal)
+DELETE Slower (row-by-row)
+TRUNCATE Fast (bulk deletion)
+
+Rollback
+
+DROP No (unless in transaction)
+DELETE Yes
+TRUNCATE Yes (if in transaction, varies by DB)
+
+
+Auto-Increment Reset
+N/A
+No
+Yes (depending on DB)
