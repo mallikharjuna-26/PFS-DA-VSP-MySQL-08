@@ -1,0 +1,649 @@
+₹Constraints in MySQL
+What are Constraints?
+Constraints are rules applied to table columns in MySQL to ensure that only valid and accurate data is stored in the database.
+In simple words:
+Constraints = Rules that control the data entered into a table.
+Why do we use constraints?
+Constraints are used to:
+ Maintain data integrity
+ Prevent invalid data entry
+ Avoid duplicate records
+ Ensure relationships between tables
+ Make the database reliable and consistent
+integrity constraints:-
+•	1) NOT NULL
+•	2) UNIQUE
+•	3) PRIMARY KEY
+.        4) composite key
+•	5) FOREIGN KEY or REFERENCECIAL INTEGRITY
+•	6)CHECK
+        7) default constraint
+ 
+Integrity Constraints in MySQL
+Integrity constraints are rules that ensure the accuracy, consistency, and reliability of data stored in a database.
+
+1) NOT NULL Constraint
+Definition
+The NOT NULL constraint ensures that a column cannot contain NULL (empty) values. Every row must have a value for that column.
+Example
+CREATE TABLE employees (
+    emp_id INT,
+    emp_name VARCHAR(50) NOT NULL,
+    salary DECIMAL(10,2)
+);
+Insert Valid Record
+INSERT INTO employees VALUES
+(101, 'Ravi', 35000);
+Insert Invalid Record
+INSERT INTO employees VALUES
+(102, NULL, 40000);
+Output
+ERROR:
+Column 'emp_name' cannot be null
+
+2) UNIQUE Constraint
+Definition
+The UNIQUE constraint ensures that all values in a column are different. Duplicate values are not allowed.
+Example
+CREATE TABLE students (
+    student_id INT UNIQUE,
+    email VARCHAR(100) ,
+    name VARCHAR(50)
+);
+Insert Records
+INSERT INTO students VALUES
+(1, 'ravi@gmail.com', 'Ravi');
+
+INSERT INTO students VALUES
+(2, 'priya@gmail.com', 'Priya');
+Duplicate Value
+INSERT INTO students VALUES
+(3, 'ravi@gmail.com', 'Mahesh');
+Output
+ERROR:
+Duplicate entry 'ravi@gmail.com' for key
+
+3) PRIMARY KEY Constraint
+Definition
+A PRIMARY KEY uniquely identifies every row in a table.
+Rules
+Cannot contain NULL values.
+Cannot contain duplicate values.
+Only one Primary Key per table.
+Example
+CREATE TABLE products (
+    product_id INT PRIMARY KEY,
+    product_name VARCHAR(50),
+    price DECIMAL(10,2)
+);
+Insert Records
+INSERT INTO products VALUES
+(101, 'Laptop', 55000);
+
+INSERT INTO products VALUES
+(102, 'Mouse', 800);
+Duplicate Primary Key
+INSERT INTO products VALUES
+(101, 'Keyboard', 1200);
+Output
+ERROR:
+Duplicate entry '101' for key 'PRIMARY'
+
+4) Composite Key
+Definition
+A Composite Key is a Primary Key formed using two or more columns together.
+Example
+CREATE TABLE enrollment (
+    student_id INT,
+    course_id INT,
+    enroll_date DATE,
+    PRIMARY KEY(student_id, course_id)
+);
+Insert Records
+INSERT INTO enrollment VALUES
+(101, 1, '2026-07-21');
+
+INSERT INTO enrollment VALUES
+(101, 2, '2026-07-21');
+
+INSERT INTO enrollment VALUES
+(102, 1, '2026-07-21');
+Duplicate Composite Key
+INSERT INTO enrollment VALUES
+(101, 1, '2026-07-22');
+Output
+ERROR:
+Duplicate entry '101-1' for key 'PRIMARY'
+
+5) FOREIGN KEY (Referential Integrity)
+Definition
+A Foreign Key creates a relationship between two tables. It ensures that a value in the child table must already exist in the parent table.
+Parent Table
+CREATE TABLE department (
+    dept_id INT PRIMARY KEY,
+    dept_name VARCHAR(50)
+);
+Insert Records
+
+INSERT INTO department VALUES
+(101,'HR'),
+(102,'IT'),
+(103,'Finance');
+
+Child Table
+CREATE TABLE employee (
+    emp_id INT PRIMARY KEY,
+    emp_name VARCHAR(50),
+    dept_id INT,
+    FOREIGN KEY(dept_id)
+    REFERENCES department(dept_id)
+);
+Valid Insert
+INSERT INTO employee VALUES
+(1,'Ravi',101);
+
+INSERT INTO employee VALUES
+(2,'Priya',102);
+Invalid Insert
+INSERT INTO employee VALUES
+(3,'Mahesh',110);
+Output
+ERROR:
+Cannot add or update a child row:
+a foreign key constraint fails
+
+6) CHECK Constraint
+Definition
+The CHECK constraint ensures that values satisfy a specified condition before insertion or update.
+Example
+CREATE TABLE exams (
+    student_id INT,
+    marks INT CHECK (marks BETWEEN 0 AND 100)
+);
+Valid Records
+INSERT INTO exams VALUES
+(101,85);
+
+INSERT INTO exams VALUES
+(102,65);
+Invalid Record
+INSERT INTO exams VALUES
+(103,120);
+Output
+ERROR:
+Check constraint violated
+
+7) DEFAULT Constraint
+Definition
+The DEFAULT constraint automatically assigns a predefined value if no value is provided during insertion.
+Example
+CREATE TABLE customers (
+    customer_id INT PRIMARY KEY,
+    customer_name VARCHAR(50),
+    city VARCHAR(50) DEFAULT 'Hyderabad'
+);
+Insert Without City
+INSERT INTO customers(customer_id, customer_name)
+VALUES
+(101,'Ravi');
+View Table
+SELECT * FROM customers;
+Output
+customer_id
+customer_name
+city
+101
+Ravi
+Hyderabad
+
+
+Insert With City
+INSERT INTO customers VALUES
+(102,'Priya','Bangalore');
+Output
+customer_id
+customer_name
+city
+101
+Ravi
+Hyderabad
+102
+Priya
+Bangalore
+
+
+Summary Table
+Constraint
+Purpose
+Duplicate Allowed
+NULL Allowed
+NOT NULL
+Prevents NULL values
+Yes
+ No
+UNIQUE
+Prevents duplicate values
+ No
+ Yes (one or more NULLs in MySQL, depending on version/usage)
+PRIMARY KEY
+Uniquely identifies each row
+ No
+ No
+Composite Key
+Combination of columns uniquely identifies a row
+ No (for the combination)
+ No (as part of the primary key)
+FOREIGN KEY
+Maintains parent-child relationship
+ Yes
+Yes (unless also declared NOT NULL)
+CHECK
+Restricts values based on a condition
+Depends on the condition
+Depends on the column definition
+DEFAULT
+Assigns a default value when none is provided
+Depends on the column
+Depends on the column defin
+
+
+
+What are Referential Actions?
+ Referential actions define what happens to child table data when the parent table data is updated or deleted.
+They are used with FOREIGN KEY constraints.
+1. ON DELETE CASCADE
+ Concept
+When a parent row is deleted, all matching child rows are automatically deleted.
+🔧 What it does
+ Keeps data consistent by removing dependent records automatically.
+
+ Example
+-- Parent Table
+CREATE TABLE Departments (
+   dept_id INT PRIMARY KEY,
+   dept_name VARCHAR(50)
+);
+
+-- Child Table
+CREATE TABLE Employees (
+   emp_id INT PRIMARY KEY,
+   name VARCHAR(100),
+   dept_id INT,
+   FOREIGN KEY (dept_id)
+   REFERENCES Departments(dept_id)
+   ON DELETE CASCADE
+);
+ Insert Records
+INSERT INTO Departments VALUES
+(1, 'IT'),
+(2, 'HR');
+
+INSERT INTO Employees VALUES
+(101, 'Rahul', 1),
+(102, 'Sneha', 1),
+(103, 'Amit', 2);
+ Operation
+DELETE FROM Departments WHERE dept_id = 1;
+ Result
+Dept 1 deleted
+Employees with dept_id = 1 also deleted automatically
+
+🔹 2. ON UPDATE CASCADE
+ Concept
+When a parent key is updated, all matching child foreign keys are updated automatically.
+ What it does
+ Maintains consistency when primary key changes.
+
+ Example
+CREATE TABLE Employees (
+   emp_id INT PRIMARY KEY,
+   name VARCHAR(100),
+   dept_id INT,
+   FOREIGN KEY (dept_id)
+   REFERENCES Departments(dept_id)
+   ON UPDATE CASCADE
+);
+ Insert Records
+INSERT INTO Departments VALUES
+(1, 'IT'),
+(2, 'HR');
+
+INSERT INTO Employees VALUES
+(101, 'Rahul', 1),
+(102, 'Sneha', 1),
+(103, 'Amit', 2);
+ Operation
+UPDATE Departments SET dept_id = 10 WHERE dept_id = 1;
+ Result
+dept_id changed from 1 → 10
+Employees dept_id also updated automatically to 10
+
+ 3. ON DELETE SET NULL
+ Concept
+When a parent row is deleted, the child foreign key becomes NULL.
+ What it does
+ Keeps the child record but removes the relationship.
+ Column must allow NULL
+
+ Example
+CREATE TABLE Employees (
+   emp_id INT PRIMARY KEY,
+   name VARCHAR(100),
+   dept_id INT NULL,
+   FOREIGN KEY (dept_id)
+   REFERENCES Departments(dept_id)
+   ON DELETE SET NULL
+);
+Insert Records
+INSERT INTO Departments VALUES
+(1, 'IT'),
+(2, 'HR');
+
+INSERT INTO Employees VALUES
+(101, 'Rahul', 1),
+(102, 'Sneha', 1),
+(103, 'Amit', 2);
+ Operation
+DELETE FROM Departments WHERE dept_id = 1;
+ Result
+Dept 1 deleted
+Employees remain, but dept_id becomes NULL
+
+ 4. ON UPDATE SET NULL
+ Concept
+When a parent key is updated, the child foreign key becomes NULL.
+ What it does
+ Breaks relationships instead of updating value.
+ Column must allow NULL
+
+ Example
+CREATE TABLE Employees (
+   emp_id INT PRIMARY KEY,
+   name VARCHAR(100),
+   dept_id INT NULL,
+   FOREIGN KEY (dept_id)
+   REFERENCES Departments(dept_id)
+   ON UPDATE SET NULL
+);
+Insert Records
+INSERT INTO Departments VALUES
+(1, 'IT'),
+(2, 'HR');
+
+INSERT INTO Employees VALUES
+(101, 'Rahul', 1),
+(102, 'Sneha', 1),
+(103, 'Amit', 2);
+
+ Operation
+UPDATE Departments SET dept_id = 10 WHERE dept_id = 1;
+ Result
+Parent updated
+Child dept_id becomes NULL (not 10)
+
+ Final Summary
+Action
+When Parent Changes
+Child Table Result
+ON DELETE CASCADE
+Delete parent
+Child rows deleted
+ON UPDATE CASCADE
+Update parent
+Child updated
+ON DELETE SET NULL
+Delete parent
+Child set to NULL
+ON UPDATE SET NULL
+Update parent
+Child set to NULL
+
+
+
+
+
+
+Q1. What is the purpose of the UNIQUE constraint in MySQL?
+
+A) To allow duplicate values
+B) To prevent duplicate values in a column or combination of columns
+C) To prevent NULL values
+D) To create a relationship between tables  
+
+Q2. Which constraint ensures that all non-NULL values in a column are unique?
+
+A) DEFAULT
+B) CHECK
+C) UNIQUE
+D) NOT NULL  
+
+Q3. Can a UNIQUE column contain NULL values in MySQL?
+
+A) No, never
+B) Yes, multiple NULL values are generally allowed
+C) Only one NULL value is allowed
+D) Only if it is an integer column  
+
+Q4. Which SQL statement correctly defines an email column with a UNIQUE constraint?
+
+A) email VARCHAR(100) DISTINCT
+B) email VARCHAR(100) UNIQUE
+C) email VARCHAR(100) NOT DUPLICATE
+D) email VARCHAR(100) PRIMARY  
+
+Q5. What is the purpose of the NOT NULL constraint?
+
+A) To prevent duplicate values
+B) To prevent NULL values
+C) To insert default values automatically
+D) To establish a relationship between tables  
+
+Q6. Which statement correctly defines a NOT NULL column?
+
+A) name VARCHAR(50) NULL
+B) name VARCHAR(50) NOT NULL
+C) name VARCHAR(50) UNIQUE
+D) name VARCHAR(50) DEFAULT NULL  
+
+Q7. What happens when you try to insert NULL into a NOT NULL column?
+
+A) MySQL always accepts the value
+B) MySQL automatically converts NULL to zero
+C) MySQL rejects the statement under normal strict-mode conditions
+D) MySQL deletes the table  
+
+Q8. Which of the following is a valid value for a NOT NULL VARCHAR column?
+
+A) NULL
+B) ' '  (a space)
+C) No value when no default exists
+D) None of the above  
+ 
+Q9. What is the main purpose of a PRIMARY KEY?
+
+A) To allow duplicate records
+B) To uniquely identify each row in a table
+C) To store only text values
+D) To assign default values  
+
+Q10. How many PRIMARY KEY constraints can a table have?
+
+A) Only one
+B) Two
+C) Three
+D) Unlimited  
+
+Q11. Can a PRIMARY KEY column contain NULL values?
+
+A) Yes
+B) No
+C) Only one NULL value
+D) Only in VARCHAR columns  
+
+Q12. Which SQL statement correctly defines student_id as a primary key?
+
+A) student_id INT UNIQUE
+B) student_id INT NOT NULL
+C) student_id INT PRIMARY KEY
+D) student_id INT DEFAULT 1  
+
+Q13. Which of the following is true about a PRIMARY KEY?
+
+A) It allows duplicate values
+B) It allows NULL values
+C) It combines uniqueness and non-NULL requirements
+D) It is used only for foreign key columns  
+
+Q14. What is the primary purpose of a FOREIGN KEY?
+
+A) To sort table records
+B) To establish and enforce a relationship between tables
+C) To prevent all duplicate values in a table
+D) To assign automatic values  
+
+Q15. A FOREIGN KEY usually references which type of column in another table?
+
+A) Any column, regardless of its properties
+B) A column or set of columns covered by a suitable key, such as a PRIMARY KEY or UNIQUE key
+C) Only a VARCHAR column
+D) Only a DEFAULT column  
+
+Q16. Which table generally contains the FOREIGN KEY?
+
+A) Parent table
+B) Child table
+C) Both tables must contain it
+D) Neither table
+
+Q17. Consider the following tables:
+CREATE TABLE department (
+    dept_id INT PRIMARY KEY,
+    dept_name VARCHAR(50)
+);
+
+CREATE TABLE employee (
+    emp_id INT PRIMARY KEY,
+    emp_name VARCHAR(50),
+    dept_id INT,
+    FOREIGN KEY (dept_id)
+        REFERENCES department(dept_id)
+);
+
+Which column is the FOREIGN KEY?
+
+A) employee.emp_id
+B) department.dept_id
+C) employee.dept_id
+D) department.dept_name  
+
+Q18. What happens if you insert a FOREIGN KEY value that does not exist in the referenced table?
+
+A) MySQL always accepts it
+B) MySQL rejects the insert when foreign key checking is enabled
+C) MySQL automatically creates the parent record
+D) MySQL changes the value to NULL automatically  
+ 
+Q19. What is a COMPOSITE KEY?
+
+A) A key consisting of two or more columns
+B) A key containing only one column
+C) A key that allows duplicate combinations
+D) A key used only for sorting  
+
+Q20. Which statement correctly defines a composite primary key using student_id and course_id?
+
+A)
+PRIMARY KEY (student_id)
+
+B)
+PRIMARY KEY (course_id)
+
+C)
+PRIMARY KEY (student_id, course_id)
+
+D)
+UNIQUE (student_id)
+
+Q21. In a composite primary key, which values must be unique?
+
+A) Each column's values must be individually unique
+B) The combination of values across the key columns must be unique
+C) Only the first column's values must be unique
+D) Only the last column's values must be unique  
+
+Q22. Which table is a common example of using a composite primary key?
+
+A) A table with a single unique employee ID
+B) An enrollment table containing student_id and course_id
+C) A table containing only product names
+D) A table containing only department names  
+Section 6: DEFAULT Constraint
+Q23. What is the purpose of the DEFAULT constraint?
+
+A) To prevent duplicate values
+B) To provide a value when an insert omits the column or specifies the DEFAULT keyword
+C) To prevent NULL values in every case
+D) To create relationships between tables  
+
+Q24. Which statement correctly defines a column with a default value of 'India'?
+
+A) country VARCHAR(50) DEFAULT 'India'
+B) country VARCHAR(50) UNIQUE 'India'
+C) country VARCHAR(50) NOT NULL 'India'
+D) country VARCHAR(50) CHECK 'India'  
+
+Q25. Consider the following table:
+CREATE TABLE employee (
+    emp_id INT PRIMARY KEY,
+    emp_name VARCHAR(50),
+    city VARCHAR(50) DEFAULT 'Hyderabad'
+);
+
+What value will be assigned to city if an INSERT statement omits the city column?
+
+A) NULL in every case
+B) Hyderabad
+C) An empty string
+D) MySQL generates a random city  
+
+Q26. If a column has a DEFAULT value, can an INSERT statement explicitly provide another value?
+
+A) No
+B) Yes
+C) Only if the column is an integer
+D) Only if the column is a primary key  
+Section 7: CHECK Constraint
+Q27. What is the purpose of a CHECK constraint?
+
+A) To validate data against a specified condition
+B) To create a primary key automatically
+C) To prevent all duplicate values
+D) To establish a relationship between tables  
+
+Q28. Which statement correctly ensures that an employee's age is at least 18?
+
+A) age INT UNIQUE
+B) age INT DEFAULT 18
+C) age INT CHECK (age >= 18)
+D) age INT PRIMARY KEY  
+
+Q29. Consider the following table:
+CREATE TABLE employee (
+    emp_id INT PRIMARY KEY,
+    salary DECIMAL(10,2),
+    CHECK (salary > 0)
+);
+
+Which salary value satisfies the CHECK condition?
+
+A) -5000
+B) 0
+C) 25000
+D) -1  
+
+Q30. Which constraint can ensure that a student's marks are between 0 and 100, inclusive?
+
+A) CHECK (marks >= 0 AND marks <= 100)
+B) UNIQUE (marks)
+C) DEFAULT 100
+D) NOT NULL (marks)
