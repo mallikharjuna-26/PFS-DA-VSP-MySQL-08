@@ -1,0 +1,643 @@
+
+What is an operator ?
+----------------
+operator is a symbol that performs a specific task.
+
+syntax
+-------
+operand  operator  operand
+a         +           b
+
+
+MySQL Operators and Their Usage
+What are Operators?
+Operators are special symbols or keywords used in MySQL to perform operations on data. They help in calculations, comparing values, filtering records, combining conditions, manipulating strings, and performing bitwise operations.
+Types of Operators
+Arithmetic Operators
+Comparison Operators
+Assignment Operators
+Logical Operators
+String Operators
+Bitwise Operators
+NULL Operators
+Special Operators
+
+1. Arithmetic Operators
+Definition
+Arithmetic operators are used to perform mathematical calculations on numeric values.
+Operator
+Description
+Example
+Result
++
+Addition
+10 + 5
+15
+-
+Subtraction
+10 - 5
+5
+*
+Multiplication
+10 * 5
+50
+/
+Division
+10 / 5
+2
+%
+Modulus (Remainder)
+10 % 3
+1
+
+
+
+STEP 1: Create Table
+CREATE TABLE Products (
+ id INT,
+ name VARCHAR(100),
+ price DECIMAL(10,2),
+ qty INT
+ );
+
+STEP 2: Insert Records
+INSERT INTO Products VALUES
+ (1, 'Pen', 10.00, 100),
+ (2, 'Notebook', 25.00, 50),
+ (3, 'Pencil', 5.00, 200),
+ (4, 'Eraser', 3.00, 300),
+ (5, 'Marker', 15.00, 80),
+ (6, 'Scale', 20.00, 150),
+ (7, 'Sharpener', 8.00, 120),
+ (8, 'Geometry Box', 120.00, 40),
+ (9, 'Sketch Pen', 60.00, 75),
+ (10, 'Crayons', 90.00, 55);
+
+SELECT Queries
+Q1. Calculate the price after adding 12% GST.
+SELECT name, price, price + (price * 0.12) AS price_with_tax
+ FROM Products;
+
+Q2. Calculate the discounted price after reducing ₹5.
+SELECT name, price, price - 5 AS discounted_price
+ FROM Products;
+
+Q3. Find the total inventory value of each product.
+SELECT name, price, qty, price * qty AS total_inventory_value
+ FROM Products;
+
+Q4. Calculate the cost of purchasing 10 units.
+SELECT name, price, price * 10 AS price_for_10_units
+ FROM Products;
+
+Q5. Display products whose quantity is not divisible by 50.
+SELECT *
+ FROM Products
+ WHERE qty % 50 <> 0;
+
+Q6. Add ₹20 to the price of every product.
+SELECT name, price, price + 20 AS increased_price
+ FROM Products;
+
+Q7. Display half of each product's quantity.
+SELECT name, qty, qty / 2 AS half_quantity
+ FROM Products;
+
+Q8. Display double the quantity of every product.
+SELECT name, qty, qty * 2 AS double_quantity
+ FROM Products;
+
+Q9. Find the remaining quantity after selling 10 units.
+SELECT name, qty, qty - 10 AS remaining_quantity
+ FROM Products;
+
+Q10. Divide the price equally among 5 people.
+SELECT name, price, price / 5 AS share_price
+ FROM Products;
+
+Q11. Display products whose price is an even number.
+SELECT *
+ FROM Products
+ WHERE price % 2 = 0;
+
+Q12. Display products whose quantity is divisible by 5.
+SELECT *
+ FROM Products
+ WHERE qty % 5 = 0;
+
+Q13. Calculate the price after giving a 10% discount.
+SELECT name, price, price - (price * 0.10) AS discounted_price
+ FROM Products;
+
+Q14. Calculate the price after adding ₹15 and then 18% GST.
+SELECT name, price, (price + 15) * 1.18 AS final_price
+ FROM Products;
+
+Q15. Display the remaining quantity after selling half the stock.
+SELECT name, qty, qty - (qty / 2) AS remaining_stock
+ FROM Products;
+
+UPDATE Queries
+Q1. Add 2 units to every product.
+UPDATE Products
+ SET qty = qty + 2;
+
+Q2. Reduce the price of every product by ₹5.
+UPDATE Products
+ SET price = price - 5;
+
+Q3. Double the quantity of Eraser.
+UPDATE Products
+ SET qty = qty * 2
+ WHERE name = 'Eraser';
+
+Q4. Reduce the quantity of Marker to half.
+UPDATE Products
+ SET qty = qty / 2
+ WHERE name = 'Marker';
+
+Q5. Increase the price of Notebook by ₹20.
+UPDATE Products
+ SET price = price + 20
+ WHERE name = 'Notebook';
+
+Q6. Increase the quantity of Pen by 50.
+UPDATE Products
+ SET qty = qty + 50
+ WHERE name = 'Pen';
+
+Q7. Reduce the quantity of Pencils by 25.
+UPDATE Products
+ SET qty = qty - 25
+ WHERE name = 'Pencil';
+
+Q8. Increase the price of Scale by 10%.
+UPDATE Products
+ SET price = price + (price * 0.10)
+ WHERE name = 'Scale';
+
+Q9. Double the quantity of Sharpener.
+UPDATE Products
+ SET qty = qty * 2
+ WHERE name = 'Sharpener';
+
+Q10. Reduce the price of Crayons by ₹15.
+UPDATE Products
+ SET price = price - 15
+ WHERE name = 'Crayons';
+
+DELETE Queries
+Q1. Delete products whose quantity is less than 100.
+DELETE FROM Products
+ WHERE qty < 100;
+
+Q2. Delete products whose price is less than ₹10.
+DELETE FROM Products
+ WHERE price < 10;
+
+Q3. Delete the Marker record.
+DELETE FROM Products
+ WHERE name = 'Marker';
+
+Q4. Delete products whose quantity is greater than 300.
+DELETE FROM Products
+ WHERE qty > 300;
+
+Q5. Delete products whose price is greater than ₹100.
+DELETE FROM Products
+ WHERE price > 100;
+This is plain text without any
+
+Comparison Operators in MySQL
+What are Comparison Operators?
+Comparison Operators are used to compare two values or expressions. They return TRUE (1) or FALSE (0) based on whether the comparison condition is satisfied.
+These operators are mainly used with the WHERE clause to filter records.
+
+Types of Comparison Operators
+Operator
+Description
+Example
+=
+Equal to
+salary = 50000
+!= or <>
+Not Equal to
+department != 'HR'
+>
+Greater Than
+salary > 50000
+<
+Less Than
+age < 25
+>=
+Greater Than or Equal To
+age >= 18
+<=
+Less Than or Equal To
+salary <= 40000
+
+Note: In MySQL, both != and <> represent Not Equal To.
+
+
+STEP 1: Create Table
+CREATE TABLE StudentScores (
+ id INT,
+ name VARCHAR(100),
+ subject VARCHAR(50),
+ marks INT
+ );
+
+STEP 2: Insert Records
+INSERT INTO StudentScores VALUES
+ (1, 'Alice', 'Math', 95),
+ (2, 'Bob', 'Math', 76),
+ (3, 'Charlie', 'Math', 59),
+ (4, 'Diana', 'Math', 88),
+ (5, 'Eve', 'Math', 40),
+ (6, 'Frank', 'Math', 95),
+ (7, 'Grace', 'Science', 67),
+ (8, 'Henry', 'Science', 82),
+ (9, 'Ivy', 'English', 91),
+ (10, 'Jack', 'English', 55),
+ (11, 'Kevin', 'Math', 73),
+ (12, 'Lily', 'Science', 48),
+ (13, 'Mia', 'English', 100),
+ (14, 'Noah', 'Math', 64),
+ (15, 'Olivia', 'Science', 79);
+
+SELECT Queries
+Q1. Display students who scored more than 80.
+SELECT *
+ FROM StudentScores
+ WHERE marks > 80;
+
+Q2. Display students who scored 60 or more.
+SELECT *
+ FROM StudentScores
+ WHERE marks >= 60;
+
+Q3. Display students who scored less than 50.
+SELECT *
+ FROM StudentScores
+ WHERE marks < 50;
+
+Q4. Display students who scored exactly 95.
+SELECT *
+ FROM StudentScores
+ WHERE marks = 95;
+
+Q5. Display students who did not score 95.
+SELECT *
+ FROM StudentScores
+ WHERE marks != 95;
+
+Q6. Display students who scored 60 or less.
+SELECT *
+ FROM StudentScores
+ WHERE marks <= 60;
+
+Q7. Display students who scored more than 70.
+SELECT *
+ FROM StudentScores
+ WHERE marks > 70;
+
+Q8. Display students who scored less than or equal to 75.
+SELECT *
+ FROM StudentScores
+ WHERE marks <= 75;
+
+Q9. Display students who scored exactly 100.
+SELECT *
+ FROM StudentScores
+ WHERE marks = 100;
+
+Q10. Display students who did not score 40.
+SELECT *
+ FROM StudentScores
+ WHERE marks <> 40;
+
+Q11. Display students who scored more than or equal to 90.
+SELECT *
+ FROM StudentScores
+ WHERE marks >= 90;
+
+Q12. Display students who scored less than 65.
+SELECT *
+ FROM StudentScores
+ WHERE marks < 65;
+
+UPDATE Queries
+Q1. Increase marks by 10 for students scoring below 50.
+UPDATE StudentScores
+ SET marks = marks + 10
+ WHERE marks < 50;
+
+Q2. Increase marks by 5 for students scoring 60 or below.
+UPDATE StudentScores
+ SET marks = marks + 5
+ WHERE marks <= 60;
+
+Q3. Add 2 bonus marks to students scoring above 90.
+UPDATE StudentScores
+ SET marks = marks + 2
+ WHERE marks > 90;
+
+Q4. Add 3 bonus marks to students scoring 80 or more.
+UPDATE StudentScores
+ SET marks = marks + 3
+ WHERE marks >= 80;
+
+Q5. Reduce 1 mark for students who did not score exactly 95.
+UPDATE StudentScores
+ SET marks = marks - 1
+ WHERE marks != 95;
+
+Q6. Set marks to 100 for students who scored exactly 95.
+UPDATE StudentScores
+ SET marks = 100
+ WHERE marks = 95;
+
+Q7. Increase marks by 15 for students scoring below 60.
+UPDATE StudentScores
+ SET marks = marks + 15
+ WHERE marks < 60;
+
+Q8. Add 5 marks for students scoring above 75.
+UPDATE StudentScores
+ SET marks = marks + 5
+ WHERE marks > 75;
+
+Q9. Reduce 3 marks for students scoring above 95.
+UPDATE StudentScores
+ SET marks = marks - 3
+ WHERE marks > 95;
+
+Q10. Set marks to 75 for students scoring below 50.
+UPDATE StudentScores
+ SET marks = 75
+ WHERE marks < 50;
+
+Q11. Increase marks by 8 for students scoring exactly 64.
+UPDATE StudentScores
+ SET marks = marks + 8
+ WHERE marks = 64;
+
+Q12. Reduce 5 marks for students scoring 100.
+UPDATE StudentScores
+ SET marks = marks - 5
+ WHERE marks = 100;
+
+DELETE Queries
+Q1. Delete students who scored below 50.
+DELETE FROM StudentScores
+ WHERE marks < 50;
+
+Q2. Delete students who scored 60 or below.
+DELETE FROM StudentScores
+ WHERE marks <= 60;
+
+Q3. Delete students who scored above 90.
+DELETE FROM StudentScores
+ WHERE marks > 90;
+
+Q4. Delete students who scored 80 or more.
+DELETE FROM StudentScores
+ WHERE marks >= 80;
+
+Q5. Delete students whose marks are not equal to 95.
+DELETE FROM StudentScores
+ WHERE marks != 95;
+
+Q6. Delete students who scored exactly 76.
+DELETE FROM StudentScores
+ WHERE marks = 76;
+
+Q7. Delete students who scored exactly 100.
+DELETE FROM StudentScores
+ WHERE marks = 100;
+
+Q8. Delete students who scored less than 65.
+DELETE FROM StudentScores
+ WHERE marks < 65;
+
+Q9. Delete students who scored greater than or equal to 90.
+DELETE FROM StudentScores
+ WHERE marks >= 90;
+
+Q10. Delete students who scored exactly 73.
+DELETE FROM StudentScores
+ WHERE marks = 73;
+
+Q11. Delete students who scored exactly 48.
+DELETE FROM StudentScores
+ WHERE marks = 48;
+
+Q12. Delete students who scored between 70 and 80 (using comparison operators).
+DELETE FROM StudentScores
+ WHERE marks >= 70 AND marks <= 80;
+
+Logical Operators in MySQL
+What are Logical Operators?
+Logical Operators are used to combine multiple conditions in a SQL query. They help filter data based on one or more conditions and are commonly used with the WHERE clause.
+Types of Logical Operators
+AND – Returns records only if all conditions are TRUE.
+OR – Returns records if at least one condition is TRUE.
+NOT – Reverses the result of a condition (TRUE becomes FALSE and vice versa).
+
+STEP 1: Create Table
+STEP 1: Create Table
+CREATE TABLE Employees (
+ id INT,
+ name VARCHAR(100),
+ department VARCHAR(100),
+ salary INT,
+ isactive BOOLEAN
+ );
+
+STEP 2: Insert Records
+INSERT INTO Employees VALUES
+ (1, 'Rahul Sharma', 'IT', 50000, TRUE),
+ (2, 'Priya Reddy', 'HR', 30000, TRUE),
+ (3, 'Amit Kumar', 'Finance', 45000, FALSE),
+ (4, 'Sneha Patel', 'IT', 35000, TRUE),
+ (5, 'Vikram Singh', 'Finance', 28000, TRUE),
+ (6, 'Anjali Mehta', 'HR', 32000, FALSE),
+ (7, 'Kiran Rao', 'IT', 60000, TRUE),
+ (8, 'Pooja Verma', 'Marketing', 27000, TRUE),
+ (9, 'Ramesh Naidu', 'Sales', 38000, TRUE),
+ (10, 'Deepika Joshi', 'Finance', 52000, TRUE),
+ (11, 'Suresh Babu', 'Marketing', 29000, FALSE),
+ (12, 'Neha Kapoor', 'HR', 41000, TRUE),
+ (13, 'Arjun Reddy', 'IT', 55000, FALSE),
+ (14, 'Lakshmi Devi', 'Sales', 33000, TRUE),
+ (15, 'Nikhil Jain', 'IT', 47000, TRUE);
+
+SELECT Queries
+Q1. Display IT department employees whose salary is greater than 40000.
+SELECT *
+ FROM Employees
+ WHERE department = 'IT' AND salary > 40000;
+
+Q2. Display employees who belong to the HR department or whose salary is less than 35000.
+SELECT *
+ FROM Employees
+ WHERE department = 'HR' OR salary < 35000;
+
+Q3. Display employees who are not in the HR department.
+SELECT *
+ FROM Employees
+ WHERE department != 'HR';
+
+Q4. Display employees whose department is Finance or whose salary is greater than 30000 and are active.
+SELECT *
+ FROM Employees
+ WHERE department = 'Finance'
+ OR (salary > 30000 AND isactive = TRUE);
+
+Q5. Display active IT employees.
+SELECT *
+ FROM Employees
+ WHERE department = 'IT' AND isactive = TRUE;
+
+Q6. Display inactive employees or employees earning less than 30000.
+SELECT *
+ FROM Employees
+ WHERE isactive = FALSE OR salary < 30000;
+
+Q7. Display Marketing employees with salary greater than 25000.
+SELECT *
+ FROM Employees
+ WHERE department = 'Marketing' AND salary > 25000;
+
+Q8. Display employees who are not in the Finance department.
+SELECT *
+ FROM Employees
+ WHERE department != 'Finance';
+
+Q9. Display active employees earning more than 50000.
+SELECT *
+ FROM Employees
+ WHERE salary > 50000 AND isactive = TRUE;
+
+Q10. Display employees from Sales or HR departments.
+SELECT *
+ FROM Employees
+ WHERE department = 'Sales' OR department = 'HR';
+
+Q11. Display employees who are inactive and belong to the IT department.
+SELECT *
+ FROM Employees
+ WHERE department = 'IT' AND isactive = FALSE;
+
+Q12. Display employees whose salary is less than 40000 and are active.
+SELECT *
+ FROM Employees
+ WHERE salary < 40000 AND isactive = TRUE;
+
+UPDATE Queries
+Q1. Increase salary by 2000 for active IT employees earning less than 60000.
+UPDATE Employees
+ SET salary = salary + 2000
+ WHERE department = 'IT'
+ AND isactive = TRUE
+ AND salary < 60000;
+
+Q2. Reduce salary by 10% for Finance department employees or inactive employees.
+UPDATE Employees
+ SET salary = salary - (salary * 0.10)
+ WHERE department = 'Finance'
+ OR isactive = FALSE;
+
+Q3. Make all non-IT employees inactive.
+UPDATE Employees
+ SET isactive = FALSE
+ WHERE department != 'IT';
+
+Q4. Increase salary by 3000 for active HR employees.
+UPDATE Employees
+ SET salary = salary + 3000
+ WHERE department = 'HR'
+ AND isactive = TRUE;
+
+Q5. Increase salary by 5000 for Sales employees earning less than 40000.
+UPDATE Employees
+ SET salary = salary + 5000
+ WHERE department = 'Sales'
+ AND salary < 40000;
+
+Q6. Activate all inactive Marketing employees.
+UPDATE Employees
+ SET isactive = TRUE
+ WHERE department = 'Marketing'
+ AND isactive = FALSE;
+
+Q7. Reduce salary by 2000 for inactive employees.
+UPDATE Employees
+ SET salary = salary - 2000
+ WHERE isactive = FALSE;
+
+Q8. Increase salary by 15% for active employees earning more than 50000.
+UPDATE Employees
+ SET salary = salary + (salary * 0.15)
+ WHERE salary > 50000
+ AND isactive = TRUE;
+
+Q9. Make all Finance employees active.
+UPDATE Employees
+ SET isactive = TRUE
+ WHERE department = 'Finance';
+
+Q10. Increase salary by 1000 for IT or Sales employees.
+UPDATE Employees
+ SET salary = salary + 1000
+ WHERE department = 'IT'
+ OR department = 'Sales';
+
+DELETE Queries
+Q1. Delete inactive employees from the HR department.
+DELETE FROM Employees
+ WHERE department = 'HR'
+ AND isactive = FALSE;
+
+Q2. Delete employees from Finance or employees earning less than 35000.
+DELETE FROM Employees
+ WHERE department = 'Finance'
+ OR salary < 35000;
+
+Q3. Delete employees who are not in the IT department.
+DELETE FROM Employees
+ WHERE department != 'IT';
+
+Q4. Delete inactive employees.
+DELETE FROM Employees
+ WHERE isactive = FALSE;
+
+Q5. Delete Marketing employees with salary less than 30000.
+DELETE FROM Employees
+ WHERE department = 'Marketing'
+ AND salary < 30000;
+
+Q6. Delete Sales employees or inactive employees.
+DELETE FROM Employees
+ WHERE department = 'Sales'
+ OR isactive = FALSE;
+
+Q7. Delete active employees earning more than 55000.
+DELETE FROM Employees
+ WHERE isactive = TRUE
+ AND salary > 55000;
+
+Q8. Delete employees who are not in the IT or HR departments.
+DELETE FROM Employees
+ WHERE department != 'IT'
+ AND department != 'HR';
+
+Q9. Delete employees whose salary is below 30000 and are inactive.
+DELETE FROM Employees
+ WHERE salary < 30000
+ AND isactive = FALSE;
+
+Q10. Delete employees from the Marketing department or whose salary is greater than 50000.
+DELETE FROM Employees
+ WHERE department = 'Marketing'
+ OR salary > 50000;
