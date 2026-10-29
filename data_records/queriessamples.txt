@@ -58,7 +58,7 @@ CREATE TABLE Employees (
    salary INT,
    isactive BOOLEAN
 );
-
+Insert Into employees values
 (1, 'Rahul Sharma', 'IT', 50000, TRUE),
 (2, 'Priya Reddy', 'HR', 30000, TRUE),
 (3, 'Amit Kumar', 'Finance', 45000, FALSE),
@@ -67,3 +67,4 @@ CREATE TABLE Employees (
 (6, 'Anjali Mehta', 'HR', 32000, FALSE),
 (7, 'Kiran Rao', 'IT', 60000, TRUE),
 (8, 'Pooja Verma', 'Marketing', 27000, TRUE);
+select*from employees;
