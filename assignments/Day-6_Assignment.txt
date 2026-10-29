@@ -1,0 +1,382 @@
+CODEGNAN IT SOLUTIONS
+MYSQL – DAY-6 ASSIGNMENT
+Topics: DCL, GRANT, REVOKE, CTAS, AUTO_INCREMENT and GENERATED COLUMNS
+
+INSTRUCTIONS
+1. Write SQL queries for every question.
+2. Execute the queries in MySQL.
+3. Verify results using SELECT and DESC.
+4. For DCL questions, connect using the respective MySQL user accounts to test permissions.
+5. Record the result of each operation and explain why it succeeds or fails.
+
+SECTION A: DCL – GRANT AND REVOKE
+
+Q1. Creating Database Users
+Create a database named DAY6_DB and a table named STUDENTS with:
+- STUDENT_ID – INT, Primary Key
+- STUDENT_NAME – VARCHAR(50)
+- AGE – INT
+- COURSE – VARCHAR(50)
+- FEE – DECIMAL(10,2)
+
+Insert at least five records into the table.
+
+Q2. Granting SELECT Privilege
+Create a MySQL user named USER1 with an appropriate password.
+Grant SELECT permission on the STUDENTS table to USER1.
+Connect as USER1 and:
+1. Display all student records.
+2. Display only student names and courses.
+3. Try inserting a new student record.
+4. Record the result.
+Explain why the INSERT operation succeeds or fails.
+
+Q3. Granting Multiple Privileges
+Create another user named USER2.
+Grant SELECT, INSERT, and UPDATE privileges on STUDENTS to USER2.
+Log in as USER2 and:
+1. Display all student records.
+2. Insert two new student records.
+3. Update the course of a student.
+4. Try deleting a student record.
+5. Try dropping the STUDENTS table.
+Identify which operations are permitted and which are denied.
+
+Q4. Revoking UPDATE Privilege
+Assume USER2 has SELECT, INSERT, and UPDATE privileges on STUDENTS.
+Revoke only the UPDATE privilege from USER2.
+Verify whether USER2 can:
+1. Retrieve student records.
+2. Insert a new student.
+3. Update a student's course.
+4. Delete a student record.
+Explain each result.
+
+Q5. Revoking Multiple Privileges
+Create REPORT_USER and grant SELECT, INSERT, UPDATE, and DELETE privileges on STUDENTS.
+1. Revoke INSERT and DELETE privileges from REPORT_USER.
+2. Verify that SELECT is still available.
+3. Verify that UPDATE is still available.
+4. Test whether INSERT and DELETE operations are denied.
+
+Q6. Complete Privilege Management
+Create an EMPLOYEES table with:
+- EMP_ID – INT, Primary Key
+- EMP_NAME – VARCHAR(50)
+- DEPARTMENT – VARCHAR(30)
+- SALARY – DECIMAL(10,2)
+
+Create HR_USER and MANAGER_USER with these permissions:
+- HR_USER: SELECT, INSERT, UPDATE
+- MANAGER_USER: SELECT only
+
+Tasks:
+1. Create both users.
+2. Grant the required permissions.
+3. Verify the privileges.
+4. Revoke UPDATE from HR_USER.
+5. Grant DELETE to MANAGER_USER.
+6. Verify the final permissions.
+
+SECTION B: USER PRIVILEGES AND ACCESS CONTROL
+
+Q7. Employee Salary Access
+Create EMPLOYEE_DETAILS with EMP_ID, EMP_NAME, DEPARTMENT, and SALARY.
+Create VIEW_USER.
+1. Grant SELECT permission on EMPLOYEE_DETAILS.
+2. Verify that the user can retrieve records.
+3. Verify that the user cannot insert, update, or delete records.
+4. Explain why restricting modification privileges is important.
+
+Q8. Department-Based Responsibilities
+A company has HR_USER, FINANCE_USER, and AUDIT_USER.
+Create an EMPLOYEES table and assign:
+- HR_USER: SELECT, INSERT, UPDATE
+- FINANCE_USER: SELECT
+- AUDIT_USER: SELECT
+
+Tasks:
+1. Create all three users.
+2. Grant the required privileges.
+3. Verify each user's privileges.
+4. Revoke UPDATE from HR_USER.
+5. Grant INSERT to AUDIT_USER.
+6. Verify the final permissions.
+
+Q9. Understanding Permission Errors
+Assume a user has only SELECT permission on PRODUCTS.
+Test these operations:
+1. SELECT
+2. INSERT
+3. UPDATE
+4. DELETE
+5. DROP TABLE
+6. ALTER TABLE
+
+Record the result of each operation and explain why certain operations fail.
+
+Q10. Checking and Managing Privileges
+Write SQL statements to:
+1. Display the privileges granted to the current MySQL user.
+2. Display the privileges granted to a specific user.
+3. Grant SELECT and UPDATE on a table to a user.
+4. Revoke SELECT from that user.
+5. Verify the remaining privileges.
+
+SECTION C: CREATE TABLE AS SELECT (CTAS)
+
+Q11. Creating an Employee Backup Table
+Create EMPLOYEES with:
+- EMP_ID – INT, Primary Key
+- EMP_NAME – VARCHAR(100)
+- DEPARTMENT – VARCHAR(50)
+- SALARY – DECIMAL(10,2)
+
+Insert at least five employees.
+1. Create BACKUP_EMPLOYEES using CREATE TABLE AS SELECT.
+2. Display both tables.
+3. Compare their structures using DESC.
+4. Insert a new record into EMPLOYEES.
+5. Check whether it appears automatically in BACKUP_EMPLOYEES.
+6. Explain the difference between copying data and keeping data synchronized.
+
+Q12. Creating a Department-Specific Backup
+Using EMPLOYEES:
+1. Create IT_EMPLOYEES containing only IT department employees.
+2. Create HIGH_SALARY_EMPLOYEES containing employees earning more than 50000.
+3. Display both tables.
+4. Verify their structures using DESC.
+5. Update an employee's salary in the original table.
+6. Check whether the change is reflected in the new tables.
+
+Q13. Copying Selected Columns
+Create EMPLOYEE_CONTACTS containing only employee ID and employee name from EMPLOYEES using CTAS.
+1. Display EMPLOYEE_CONTACTS.
+2. Verify its structure using DESC.
+3. Insert a new employee into EMPLOYEES.
+4. Check whether the new employee appears in EMPLOYEE_CONTACTS.
+5. Explain why the new table does not automatically receive the new record.
+
+SECTION D: AUTO_INCREMENT AND PRIMARY KEYS
+
+Q14. Student Registration System
+Create STUDENT_REGISTRATION with:
+- REG_ID – INT, AUTO_INCREMENT, Primary Key
+- STUDENT_NAME – VARCHAR(50)
+- COURSE – VARCHAR(50)
+- FEE – DECIMAL(10,2)
+
+Insert five records without specifying REG_ID.
+1. Display all records.
+2. Verify the generated IDs.
+3. Insert another student.
+4. Delete one student record.
+5. Insert another student and observe the generated ID.
+6. Explain how AUTO_INCREMENT behaves when records are deleted.
+
+Q15. Employee Management System
+Create EMPLOYEES with an AUTO_INCREMENT primary key.
+Insert these employees:
+- Malli – IT – 45000
+- Indu – HR – 40000
+- Ravi – Finance – 50000
+- Priya – IT – 60000
+- Kiran – Sales – 35000
+
+Tasks:
+1. Insert all records without providing employee IDs.
+2. Display the generated IDs.
+3. Insert two additional employees.
+4. Retrieve all employees working in IT.
+5. Update Priya's salary to 65000.
+6. Display employees earning more than 45000.
+
+SECTION E: GENERATED COLUMNS
+
+Q16. Product Billing System
+Create PRODUCTS with:
+- PRODUCT_ID – INT, Primary Key
+- PRODUCT_NAME – VARCHAR(50)
+- PRICE – DECIMAL(10,2)
+- QUANTITY – INT
+- TOTAL_AMOUNT – STORED generated column calculated as PRICE * QUANTITY
+
+Insert these records:
+PRODUCT_ID | PRODUCT_NAME | PRICE | QUANTITY
+1 | Keyboard | 500 | 3
+2 | Mouse | 300 | 5
+3 | Monitor | 7500 | 2
+4 | Headphones | 1200 | 4
+5 | Webcam | 2000 | 2
+
+Tasks:
+1. Display all product records.
+2. Verify TOTAL_AMOUNT values.
+3. Update the Keyboard price to 600.
+4. Verify the updated total amount.
+5. Update the Mouse quantity to 8.
+6. Display products whose total amount exceeds 5000.
+7. Explain why a value cannot be assigned directly to the generated column.
+
+Q17. Employee Bonus Calculation
+Create EMPLOYEE_PAYROLL with:
+- EMP_ID – INT, Primary Key
+- EMP_NAME – VARCHAR(50)
+- BASIC_SALARY – DECIMAL(10,2)
+- BONUS_PERCENT – DECIMAL(5,2)
+- BONUS_AMOUNT – STORED generated column: BASIC_SALARY * BONUS_PERCENT / 100
+- TOTAL_SALARY – STORED generated column: BASIC_SALARY + BONUS_AMOUNT
+
+Insert at least five employees.
+1. Display all payroll records.
+2. Verify bonus amounts.
+3. Verify each employee's total salary.
+4. Update an employee's basic salary.
+5. Update an employee's bonus percentage.
+6. Verify whether both generated columns are recalculated.
+7. Retrieve employees whose total salary exceeds 60000.
+
+Q18. Inventory Management
+Create INVENTORY with:
+- ITEM_ID – INT, Primary Key
+- ITEM_NAME – VARCHAR(50)
+- UNIT_PRICE – DECIMAL(10,2)
+- STOCK_QUANTITY – INT
+- STOCK_VALUE – STORED generated column: UNIT_PRICE * STOCK_QUANTITY
+
+Tasks:
+1. Insert at least five inventory items.
+2. Display the stock value of each item.
+3. Update the price of an item.
+4. Update another item's stock quantity.
+5. Display items with stock value greater than 10000.
+6. Explain how generated columns help maintain consistent calculations.
+
+SECTION F: MIXED SCENARIO-BASED QUESTIONS
+
+Q19. Online Shopping Database
+Create PRODUCTS with:
+- PRODUCT_ID – INT, AUTO_INCREMENT, Primary Key
+- PRODUCT_NAME – VARCHAR(100)
+- PRICE – DECIMAL(10,2)
+- QUANTITY – INT
+- TOTAL_VALUE – STORED generated column: PRICE * QUANTITY
+
+Tasks:
+1. Insert at least five products.
+2. Display all products and their total values.
+3. Create PRODUCTS_BACKUP using CTAS.
+4. Create INVENTORY_USER.
+5. Grant SELECT and UPDATE on PRODUCTS to INVENTORY_USER.
+6. Verify that the user can retrieve and update product information.
+7. Verify that the user cannot insert or delete records.
+8. Revoke UPDATE permission.
+9. Verify that the user can still retrieve records.
+10. Update a product's price using an authorized account and check the generated total value.
+
+Q20. College Database Access Control
+Create STUDENTS with:
+- STUDENT_ID – INT, AUTO_INCREMENT, Primary Key
+- STUDENT_NAME – VARCHAR(100)
+- DEPARTMENT – VARCHAR(50)
+- FEE – DECIMAL(10,2)
+- SCHOLARSHIP_PERCENT – DECIMAL(5,2)
+- SCHOLARSHIP_AMOUNT – STORED generated column: FEE * SCHOLARSHIP_PERCENT / 100
+- PAYABLE_FEE – STORED generated column: FEE - SCHOLARSHIP_AMOUNT
+
+Tasks:
+1. Insert at least five students.
+2. Display each student's scholarship amount and payable fee.
+3. Create a backup table containing all students.
+4. Create ADMISSION_USER and ACCOUNTS_USER.
+5. Grant SELECT and INSERT to ADMISSION_USER.
+6. Grant SELECT and UPDATE to ACCOUNTS_USER.
+7. Test the permissions using separate MySQL connections.
+8. Revoke INSERT from ADMISSION_USER.
+9. Revoke UPDATE from ACCOUNTS_USER.
+10. Update a student's fee using an authorized account and verify the recalculated generated columns.
+
+SECTION G: CHALLENGE QUESTIONS
+
+Q21. Permission Troubleshooting
+STAFF_USER has SELECT and UPDATE privileges on EMPLOYEES.
+- SELECT works.
+- UPDATE works.
+- INSERT fails.
+- DELETE fails.
+- DROP TABLE fails.
+
+Answer:
+1. Why do INSERT and DELETE fail?
+2. Why does DROP TABLE fail?
+3. Write the statement to grant INSERT.
+4. Write the statement to grant DELETE.
+5. Explain why UPDATE does not automatically grant INSERT or DELETE.
+
+Q22. Backup and Data Consistency
+A developer executes:
+CREATE TABLE BACKUP_EMPLOYEES AS SELECT * FROM EMPLOYEES;
+
+After one week, the original table contains new employees and updated salaries, but the backup still contains old data.
+
+Answer:
+1. Why does the backup not reflect the latest changes?
+2. Write a query to refresh the backup table's data.
+3. Explain the difference between a copied table and a live view.
+4. What precautions should be taken before replacing existing backup data?
+
+Q23. Generated Column Restrictions
+A developer creates a table with PRICE, QUANTITY, and a generated column TOTAL_AMOUNT.
+The developer executes:
+UPDATE PRODUCTS SET TOTAL_AMOUNT = 5000 WHERE PRODUCT_ID = 1;
+
+Answer:
+1. Why does this operation fail?
+2. How can the total amount be changed indirectly?
+3. Write the appropriate UPDATE statement.
+4. Explain how MySQL recalculates the generated value.
+
+Q24. Privilege Revocation Scenario
+A database administrator grants SELECT, INSERT, UPDATE, and DELETE privileges to MANAGER_USER. Later, the manager should only view records.
+
+Tasks:
+1. Revoke INSERT.
+2. Revoke UPDATE.
+3. Revoke DELETE.
+4. Verify that SELECT remains available.
+5. Test the permissions using the manager's account.
+
+Q25. Final Practical Challenge
+Design an Employee Payroll Management System using the Day-6 concepts.
+
+Your solution must include:
+1. Create an EMPLOYEES table with an AUTO_INCREMENT primary key.
+2. Insert at least five employee records.
+3. Create a generated column to calculate annual salary from monthly salary.
+4. Create a backup table using CTAS.
+5. Create ADMIN_USER, HR_USER, and REPORT_USER.
+6. Grant appropriate privileges to each user.
+7. Test INSERT, SELECT, UPDATE, and DELETE permissions.
+8. Revoke selected privileges from HR_USER.
+9. Verify the final permissions.
+10. Update an employee's monthly salary and check the recalculated annual salary.
+11. Compare the original and backup tables after the update.
+12. Explain how access control improves database security.
+
+SUBMISSION REQUIREMENTS
+- Submit an SQL script containing CREATE, INSERT, GRANT, REVOKE, UPDATE, and CTAS statements.
+- Include output screenshots for important operations.
+- Include results of privilege testing using different MySQL accounts.
+- Include DESC output for the created tables.
+- Provide short explanations for scenario-based questions.
+
+IMPORTANT NOTES
+1. Execute DCL questions using an account with sufficient privileges to create users and grant or revoke permissions.
+2. Use separate MySQL connections to test each user's permissions.
+3. Use straight single quotes in SQL statements, for example:
+   CREATE USER 'user1'@'localhost' IDENTIFIED BY 'StrongPasswordHere';
+4. Use strong passwords in real applications; simple passwords should be used only in controlled demonstrations.
+5. CREATE TABLE ... AS SELECT copies the query result into a new table. It does not keep the copy synchronized, and the new table generally does not inherit the original table's indexes and constraints.
+6. AUTO_INCREMENT values are generated automatically. Deleted IDs are not necessarily reused.
+7. Generated columns are calculated from their expressions. Update the underlying columns instead of assigning values directly to generated columns.
+8. Privileges depend on the grants and roles applicable to the MySQL account.
