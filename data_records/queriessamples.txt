@@ -46,3 +46,24 @@ INSERT INTO StudentScores VALUES
  (15, 'Olivia', 'Science', 79);
 
 SELECT*FROM STUDENTSCORES;
+
+
+
+
+
+CREATE TABLE Employees (
+   id INT,
+   name VARCHAR(100),
+   department VARCHAR(100),
+   salary INT,
+   isactive BOOLEAN
+);
+
+(1, 'Rahul Sharma', 'IT', 50000, TRUE),
+(2, 'Priya Reddy', 'HR', 30000, TRUE),
+(3, 'Amit Kumar', 'Finance', 45000, FALSE),
+(4, 'Sneha Patel', 'IT', 35000, TRUE),
+(5, 'Vikram Singh', 'Finance', 28000, TRUE),
+(6, 'Anjali Mehta', 'HR', 32000, FALSE),
+(7, 'Kiran Rao', 'IT', 60000, TRUE),
+(8, 'Pooja Verma', 'Marketing', 27000, TRUE);
