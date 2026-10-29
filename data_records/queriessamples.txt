@@ -1,0 +1,18 @@
+CREATE TABLE Products (
+ id INT,
+ name VARCHAR(100),
+ price DECIMAL(10,2),
+ qty INT
+ );
+
+INSERT INTO Products VALUES
+ (1, 'Pen', 10.00, 100),
+ (2, 'Notebook', 25.00, 50),
+ (3, 'Pencil', 5.00, 200),
+ (4, 'Eraser', 3.00, 300),
+ (5, 'Marker', 15.00, 80),
+ (6, 'Scale', 20.00, 150),
+ (7, 'Sharpener', 8.00, 120),
+ (8, 'Geometry Box', 120.00, 40),
+ (9, 'Sketch Pen', 60.00, 75),
+ (10, 'Crayons', 90.00, 55);
