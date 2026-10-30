@@ -97,3 +97,31 @@ INSERT INTO Projects VALUES
  (15, 'Banking Application', NULL, '2024-10-01', NULL);
 
 select*from projects;
+
+
+
+CREATE TABLE Orders (
+ id INT,
+ customer_name VARCHAR(100),
+ order_date DATE,
+ total_amount DECIMAL(10,2)
+ );
+
+INSERT INTO Orders VALUES
+ (1, 'Alice', '2024-03-01', 1500.00),
+ (2, 'Bob', '2024-03-05', 450.00),
+ (3, 'Charlie', '2024-03-10', 2500.00),
+ (4, 'Diana', '2024-03-15', 800.00),
+ (5, 'Eve', '2024-03-20', 1200.00),
+ (6, 'Frank', '2024-03-25', 3000.00),
+ (7, 'Grace', '2024-04-02', 1800.00),
+ (8, 'Henry', '2024-04-08', 950.00),
+ (9, 'Ivy', '2024-04-12', 2750.00),
+ (10, 'Jack', '2024-04-18', 650.00),
+ (11, 'Kevin', '2024-04-22', 4200.00),
+ (12, 'Lily', '2024-05-01', 1350.00),
+ (13, 'Michael', '2024-05-08', 5000.00),
+ (14, 'Nancy', '2024-05-15', 2250.00),
+ (15, 'Oliver', '2024-05-25', 900.00);
+
+SELECT*FROM ORDERS;
