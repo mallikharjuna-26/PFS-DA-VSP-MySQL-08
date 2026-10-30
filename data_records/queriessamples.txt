@@ -125,3 +125,31 @@ INSERT INTO Orders VALUES
  (15, 'Oliver', '2024-05-25', 900.00);
 
 SELECT*FROM ORDERS;
+
+
+CREATE TABLE Emp (
+ id INT,
+ name VARCHAR(100),
+ dept VARCHAR(20),
+ salary INT
+ );
+
+
+INSERT INTO Emp VALUES
+ (1, 'Rahul', 'IT', 50000),
+ (2, 'Ramesh', 'HR', 35000),
+ (3, 'Karan', 'Finance', 45000),
+ (4, 'Mahesh', 'Marketing', 40000),
+ (5, 'Suresh', 'IT', 55000),
+ (6, 'Arjun', 'Sales', 38000),
+ (7, 'Manish', 'Admin', 42000),
+ (8, 'Ganesh', 'Finance', 47000),
+ (9, 'Naresh', 'HR', 39000),
+ (10, 'Rohan', 'IT', 52000),
+ (11, 'Mohan', 'Sales', 41000),
+ (12, 'Kishan', 'Marketing', 43000),
+ (13, 'Dinesh', 'Admin', 46000),
+ (14, 'Rajesh', 'Finance', 51000),
+ (15, 'Kiran', 'IT', 48000);
+
+select*from emp;
