@@ -153,3 +153,25 @@ INSERT INTO Emp VALUES
  (15, 'Kiran', 'IT', 48000);
 
 select*from emp;
+
+
+CREATE TABLE employees (
+    emp_id INT PRIMARY KEY,
+    emp_name VARCHAR(50),
+    department VARCHAR(30),
+    salary DECIMAL(10,2),
+    experience INT,
+    age INT
+);
+
+INSERT INTO employees VALUES
+(101,'Ravi','IT',65000,5,28),
+(102,'Priya','HR',45000,2,24),
+(103,'Amit','Finance',75000,8,35),
+(104,'Sneha','IT',55000,3,27),
+(105,'Rahul','Sales',40000,1,22),
+(106,'Kiran','Finance',90000,12,40),
+(107,'Anjali','HR',52000,4,29),
+(108,'Suresh','Sales',68000,7,33);
+
+SELECT*FROM EMPLOYEES;
