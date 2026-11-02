@@ -1,0 +1,261 @@
+BETWEEN Operator 
+===================
+CREATE TABLE Orders (
+ id INT,
+ customer_name VARCHAR(100),
+ order_date DATE,
+ total_amount DECIMAL(10,2)
+ );
+
+
+INSERT INTO Orders VALUES
+ (1, 'Alice', '2024-03-01', 1500.00),
+ (2, 'Bob', '2024-03-05', 450.00),
+ (3, 'Charlie', '2024-03-10', 2500.00),
+ (4, 'Diana', '2024-03-15', 800.00),
+ (5, 'Eve', '2024-03-20', 1200.00),
+ (6, 'Frank', '2024-03-25', 3000.00),
+ (7, 'Grace', '2024-04-02', 1800.00),
+ (8, 'Henry', '2024-04-08', 950.00),
+ (9, 'Ivy', '2024-04-12', 2750.00),
+ (10, 'Jack', '2024-04-18', 650.00),
+ (11, 'Kevin', '2024-04-22', 4200.00),
+ (12, 'Lily', '2024-05-01', 1350.00),
+ (13, 'Michael', '2024-05-08', 5000.00),
+ (14, 'Nancy', '2024-05-15', 2250.00),
+ (15, 'Oliver', '2024-05-25', 900.00);
+
+Select Queries
+----------------
+Q6.Display customer names whose order amount is between 2000 and 5000.
+
+Q7.Display orders placed between '2024-03-15' and '2024-04-15'.
+
+Q8.Display orders whose amount is between 800 and 1800.
+
+Q9.Display orders placed between '2024-04-10' and '2024-05-10'.
+
+Q10.Display orders whose amount is between 2500 and 5000.
+
+Update Queries
+-------------
+Q6. Reduce the total amount by 100 for orders placed between '2024-03-15' and '2024-03-31'.
+
+Q7. Increase the total amount by 750 for orders between 800 and 1500.
+
+Q8. Reduce the total amount by 500 for orders between 3000 and 5000.
+
+Q9. Increase the total amount by 250 for orders placed between '2024-04-20' and '2024-05-10'.
+
+Q10. Add 100 to all orders placed between '2024-03-01' and '2024-05-31'.
+
+Delete Queries
+------------
+Q6. Delete orders whose total amount is between 1000 and 2000.
+
+Q7. Delete orders placed between '2024-03-01' and '2024-03-05'.
+
+Q8. Delete orders placed between '2024-04-18' and '2024-05-08'.
+
+Q9. Delete orders whose total amount is between 1800 and 3000.
+
+Q10. Delete orders placed between '2024-03-25' and '2024-04-08'.
+
+
+IN Operator 
+================
+CREATE TABLE Emp (
+ id INT,
+ name VARCHAR(100),
+ dept VARCHAR(20),
+ salary INT
+ );
+
+
+INSERT INTO Emp VALUES
+ (1, 'Rahul', 'IT', 50000),
+ (2, 'Ramesh', 'HR', 35000),
+ (3, 'Karan', 'Finance', 45000),
+ (4, 'Mahesh', 'Marketing', 40000),
+ (5, 'Suresh', 'IT', 55000),
+ (6, 'Arjun', 'Sales', 38000),
+ (7, 'Manish', 'Admin', 42000),
+ (8, 'Ganesh', 'Finance', 47000),
+ (9, 'Naresh', 'HR', 39000),
+ (10, 'Rohan', 'IT', 52000),
+ (11, 'Mohan', 'Sales', 41000),
+ (12, 'Kishan', 'Marketing', 43000),
+ (13, 'Dinesh', 'Admin', 46000),
+ (14, 'Rajesh', 'Finance', 51000),
+ (15, 'Kiran', 'IT', 48000);
+
+Select Queries
+================
+Q6. Display employees from the Sales, Marketing, and Finance departments.
+
+Q7. Display employees from the Admin department.
+
+Q8. Display employees whose salary is 39000, 43000, or 52000.
+
+Q9. Display employees from the IT, Admin, and Sales departments.
+
+Q10. Display employees whose salary is 40000, 45000, or 50000.
+
+Update Queries
+===============
+Q6. Increase salary by 2500 for employees earning 45000, 48000, or 52000.
+
+Q7. Increase salary by 4000 for employees in the Admin department.
+
+Q8. Increase salary by 3500 for employees in the Marketing and Finance departments.
+
+Q9. Increase salary by 500 for employees earning 40000, 41000, or 42000.
+
+Q10. Increase salary by 2000 for employees in the IT, Sales, and Admin departments.
+
+Delete Queries
+==============
+Q6. Delete employees whose salary is 45000, 50000, or 55000.
+
+Q7. Delete employees from the Marketing and HR departments.
+
+Q8. Delete employees from the Admin department.
+
+Q9. Delete employees whose salary is 37000, 38000, or 41000.
+
+Q10. Delete employees from the IT, Finance, and Sales departments.
+
+
+LIKE Operator Practice Questions
+======================================
+
+CREATE TABLE Emp (
+ id INT,
+ name VARCHAR(100),
+ dept VARCHAR(20),
+ salary INT
+ );
+
+
+INSERT INTO Emp VALUES
+ (1, 'Rahul', 'IT', 50000),
+ (2, 'Ramesh', 'HR', 35000),
+ (3, 'Karan', 'Finance', 45000),
+ (4, 'Mahesh', 'Marketing', 40000),
+ (5, 'Suresh', 'IT', 55000),
+ (6, 'Arjun', 'Sales', 38000),
+ (7, 'Manish', 'Admin', 42000),
+ (8, 'Ganesh', 'Finance', 47000),
+ (9, 'Naresh', 'HR', 39000),
+ (10, 'Rohan', 'IT', 52000),
+ (11, 'Mohan', 'Sales', 41000),
+ (12, 'Kishan', 'Marketing', 43000),
+ (13, 'Dinesh', 'Admin', 46000),
+ (14, 'Rajesh', 'Finance', 51000),
+ (15, 'Kiran', 'IT', 48000);
+
+
+SELECT Queries
+=================
+Q6. Display employees whose names have 'a' as the second character.
+
+Q7. Display employees whose names contain 'es'.
+
+Q8. Display employees whose names end with 'n'.
+
+Q9. Display employees whose names start with 'M' and contain 'e'.
+
+Q10. Display employees whose names have exactly 6 characters and end with 'h'.
+
+Q11. Display employees whose names start with 'A'.
+
+Q12. Display employees whose names end with 'an'.
+
+Q13. Display employees whose names contain 'oh'.
+
+Q14. Display employees whose names have exactly 7 characters.
+
+Q15. Display employees whose names start with 'S'.
+
+Update Queries
+===============
+Q6. Increase salary by 1500 for employees whose names have 'a' as the second character.
+
+Q7. Increase salary by 4000 for employees whose names contain 'es'.
+
+Q8. Increase salary by 1000 for employees whose names end with 'n'.
+
+Q9. Increase salary by 5000 for employees whose names start with 'M' and contain 'e'.
+
+Q10. Increase salary by 2000 for employees whose names have exactly 6 characters and end with 'h'.
+
+Delete Queries
+==================
+Q6. Delete employees whose names have 'a' as the second character.
+
+Q7. Delete employees whose names contain 'es'.
+
+Q8. Delete employees whose names end with 'n'.
+
+Q9. Delete employees whose names start with 'M' and contain 'e'.
+
+Q10. Delete employees whose names have exactly 6 characters and end with 'h'.
+
+Case Operator
+=============
+CREATE TABLE employees (
+    emp_id INT PRIMARY KEY,
+    emp_name VARCHAR(50),
+    department VARCHAR(30),
+    salary DECIMAL(10,2),
+    experience INT,
+    age INT
+);
+
+INSERT INTO employees VALUES
+(101,'Ravi','IT',65000,5,28),
+(102,'Priya','HR',45000,2,24),
+(103,'Amit','Finance',75000,8,35),
+(104,'Sneha','IT',55000,3,27),
+(105,'Rahul','Sales',40000,1,22),
+(106,'Kiran','Finance',90000,12,40),
+(107,'Anjali','HR',52000,4,29),
+(108,'Suresh','Sales',68000,7,33);
+
+
+Case Operator Queries
+========================
+ Example 3: Department Bonus
+
+**Q3.** Display the employee name, department, salary, and bonus amount based on the department. Calculate the bonus as follows:
+- IT employees receive a 20% bonus.
+- Finance employees receive a 15% bonus.
+- HR employees receive a 10% bonus.
+- Employees from other departments receive a 5% bonus.
+
+ Example 4: Voting Eligibility
+
+**Q4.** Display the employee name, age, and voting eligibility status. If an employee's age is 18 or above, display 'Eligible'; otherwise, display 'Not Eligible'.
+
+ Example 5: Grade Employees
+
+**Q5.** Display the employee name, salary, and grade based on salary:
+- Salary greater than or equal to 80,000: Grade A.
+- Salary greater than or equal to 60,000: Grade B.
+- Salary greater than or equal to 50,000: Grade C.
+- Salary below 50,000: Grade D.
+
+ Example 6: CASE in ORDER BY
+
+**Q6.** Display all employees, showing employees from the IT department first, followed by employees from all other departments, using the CASE operator in the ORDER BY clause.
+
+ Example 7: CASE in UPDATE
+
+**Q7.** Increase employee salaries based on their years of experience:
+- Employees with 10 or more years of experience receive a salary increase of 10,000.
+- Employees with 5 or more years of experience but less than 10 years receive a salary increase of 5,000.
+- Employees with less than 5 years of experience receive a salary increase of 2,000.
+
+Example 8: CASE with Aggregate Function
+
+**Q8.** Calculate and display the total salary of employees working in the IT department using the CASE operator and the SUM() aggregate function.
