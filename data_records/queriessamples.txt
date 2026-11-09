@@ -384,3 +384,36 @@ select*from customers;
 select*from products;
 select*from orders;
 
+
+
+CREATE TABLE departments (
+	dept_id INT PRIMARY KEY AUTO_INCREMENT,
+	dept_name VARCHAR(50),
+	location VARCHAR(50)
+);
+ 
+CREATE TABLE employees (
+	emp_id INT PRIMARY KEY AUTO_INCREMENT,
+	emp_name VARCHAR(100),
+	dept_id INT,
+	designation VARCHAR(50),
+	salary DECIMAL(10,2),
+	join_date DATE,
+	FOREIGN KEY (dept_id) REFERENCES departments(dept_id)
+);
+
+INSERT INTO departments (dept_name, location) VALUES
+('IT','Hyderabad'), ('HR','Bangalore'), ('Finance','Chennai'), ('Sales','Mumbai');
+ 
+INSERT INTO employees (emp_name, dept_id, designation, salary, join_date) VALUES
+('Rahul',1,'Software Engineer',55000,'2021-06-15'),
+('Anita',2,'HR Executive',38000,'2020-03-21'),
+('Suresh',4,'Sales Manager',52000,'2019-08-10'),
+('Priya',1,'Team Lead',65000,'2022-01-05'),
+('Kiran',3,'Finance Analyst',48000,'2018-12-11'),
+('Deepika',2,'HR Manager',60000,'2019-10-19');
+select*from departments;
+select*from employees;
+
+
+
