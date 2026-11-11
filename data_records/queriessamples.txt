@@ -447,3 +447,34 @@ VALUES
 
 SELECT*FROM EMPLOYEES;
 
+
+
+CREATE TABLE Employees (
+	emp_id INT PRIMARY KEY,
+	emp_name VARCHAR(50),
+	department VARCHAR(30),
+	salary DECIMAL(10,2),
+	experience INT,
+	city VARCHAR(30)
+);
+ 
+INSERT INTO Employees VALUES
+(101,'Rahul','IT',65000,5,'Hyderabad'),
+(102,'Priya','HR',45000,3,'Chennai'),
+(103,'Amit','Finance',70000,6,'Bangalore'),
+(104,'Sneha','IT',80000,8,'Hyderabad'),
+(105,'Kiran','Sales',40000,2,'Pune');
+
+
+CREATE TABLE Employee_Audit(
+	audit_id INT AUTO_INCREMENT PRIMARY KEY,
+	emp_id INT,
+	action_type VARCHAR(20),
+	old_salary DECIMAL(10,2),
+	new_salary DECIMAL(10,2),
+	action_time DATETIME
+);
+
+select*from employees;
+select*from employee_audit;
+
